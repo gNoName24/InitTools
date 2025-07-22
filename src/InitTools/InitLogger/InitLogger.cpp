@@ -56,16 +56,3 @@ void InitLogger::AlignedLocationFlag::format(const spdlog::details::log_msg& msg
 std::unique_ptr<spdlog::custom_flag_formatter> InitLogger::AlignedLocationFlag::clone() const {
     return spdlog::details::make_unique<InitLogger::AlignedLocationFlag>();
 }
-
-/*std::shared_ptr<spdlog::logger> InitLogger::Logger = spdlog::stdout_color_mt("console");
-
-void InitLogger::initLogger() {
-    auto formatter = std::make_unique<spdlog::pattern_formatter>();
-
-    formatter->add_flag<LevelShortForm>('S');
-    formatter->add_flag<AlignedLocationFlag>('L');
-
-    formatter->set_pattern("[%^%S%$] [%T] [%L] %v");
-
-    Logger->set_formatter(std::move(formatter));
-}*/

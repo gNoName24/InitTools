@@ -8,8 +8,8 @@
 #include <spdlog/pattern_formatter.h>
 
 namespace InitLogger {
-    inline extern std::shared_ptr<spdlog::logger> logger;
-    inline void initLogger();
+    extern std::shared_ptr<spdlog::logger> logger;
+    void initLogger();
 
     #define log_trace(fmt, ...)    logger->log(spdlog::source_loc{__FILE__, __LINE__, __func__}, spdlog::level::trace, fmt, ##__VA_ARGS__)
     #define log_debug(fmt, ...)    logger->log(spdlog::source_loc{__FILE__, __LINE__, __func__}, spdlog::level::debug, fmt, ##__VA_ARGS__)
