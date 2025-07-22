@@ -1,22 +1,22 @@
-# InitLogger
+# InitTools
 
 ### Добавление в CMake проект через FetchContent:
 ```cmake
 FetchContent_Declare(
-    initlogger
-    GIT_REPOSITORY https://github.com/gNoName24/InitLogger.git
+    inittools
+    GIT_REPOSITORY https://github.com/gNoName24/InitTools.git
     GIT_TAG        <version>
 )
-FetchContent_MakeAvailable(initlogger)
+FetchContent_MakeAvailable(inittools)
 
 target_link_libraries(MyAwesomeProject PRIVATE
-    InitLogger::InitLogger
+    InitTools::InitTools
 )
 ```
 
-### Использование:
+### Использование InitLogger:
 ```cpp
-#include <InitLogger/InitLogger.h>
+#include <InitTools/InitLogger.h>
 
 int main() {
   InitLogger::initLogger();
