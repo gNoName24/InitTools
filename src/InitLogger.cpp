@@ -1,8 +1,8 @@
 #include "InitLogger/InitLogger.h"
 
-std::shared_ptr<spdlog::logger> Logger = spdlog::stdout_color_mt("console");
+std::shared_ptr<spdlog::logger> InitLogger::Logger = spdlog::stdout_color_mt("console");
 
-void initLogger() {
+void InitLogger::initLogger() {
     auto formatter = std::make_unique<spdlog::pattern_formatter>();
 
     formatter->add_flag<LevelShortForm>('S');
