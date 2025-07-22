@@ -10,17 +10,17 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(initlogger)
 
 target_link_libraries(MyAwesomeProject PRIVATE
-    initlogger
+    InitLogger::InitLogger
 )
 ```
 
 ### Использование:
 ```cpp
-#include "InitLogger/InitLogger.h"
+#include <InitLogger/InitLogger.h>
 
 int main() {
-  initLogger();
-  log_info("1 + 1 = {}", 3);
+  InitLogger::initLogger();
+  InitLogger::log_info("1 + 1 = {}", 3);
 
   return 0;
 }
