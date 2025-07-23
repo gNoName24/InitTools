@@ -1,4 +1,3 @@
-#ifdef ENABLE_INITWINDOW
 #include <InitTools/InitWindow.h>
 
 namespace InitWindow {
@@ -22,5 +21,3 @@ namespace InitWindow {
         glfwSetWindowTitle(window, title.c_str());
     }
 };
-
-#endif
