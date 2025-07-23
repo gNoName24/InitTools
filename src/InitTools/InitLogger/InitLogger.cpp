@@ -6,12 +6,8 @@ namespace InitLogger {
     std::string logger_name = "console";
     int source_loc_width = 32;
     std::unordered_map<std::string, std::string> levels = {
-        {"info", "I"},
-        {"err", "E"},
-        {"warn", "W"},
-        {"debug", "D"},
-        {"trace", "T"},
-        {"critical", "C"},
+        {"info", "I"}, {"err", "E"}, {"warn", "W"},
+        {"debug", "D"}, {"trace", "T"}, {"critical", "C"},
         {"default", "?"}
     };
     std::string pattern = "[%^%S%$] [%T] [%L] %v";
