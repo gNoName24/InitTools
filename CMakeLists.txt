@@ -32,16 +32,23 @@ include(FetchContent)
             GIT_REPOSITORY https://github.com/Dav1dde/glad.git
             GIT_TAG        v0.1.36
     )
-    FetchContent_Populate(glad)
-    set(GLAD_CMAKE_FILE "${glad_SOURCE_DIR}/CMakeLists.txt")
-    file(READ "${GLAD_CMAKE_FILE}" GLAD_CMAKE_CONTENTS)
-    string(REGEX REPLACE
-        "cmake_minimum_required\\(VERSION[ \t]+3\\.0[^\)]*\\)"
-        "cmake_minimum_required(VERSION 3.5)"
-        GLAD_CMAKE_CONTENTS "${GLAD_CMAKE_CONTENTS}"
-    )
-    file(WRITE "${GLAD_CMAKE_FILE}" "${GLAD_CMAKE_CONTENTS}")
-    add_subdirectory(${glad_SOURCE_DIR} ${glad_BINARY_DIR})
+    if(NOT glad_POPULATED)
+        FetchContent_GetProperties(glad)
+        if(NOT glad_POPULATED)
+            FetchContent_Populate(glad)
+
+            set(GLAD_CMAKE_FILE "${glad_SOURCE_DIR}/CMakeLists.txt")
+            file(READ "${GLAD_CMAKE_FILE}" GLAD_CMAKE_CONTENTS)
+            string(REGEX REPLACE
+                "cmake_minimum_required\\(VERSION[ \t]+3\\.0[^\)]*\\)"
+                "cmake_minimum_required(VERSION 3.5)"
+                GLAD_CMAKE_CONTENTS "${GLAD_CMAKE_CONTENTS}"
+            )
+            file(WRITE "${GLAD_CMAKE_FILE}" "${GLAD_CMAKE_CONTENTS}")
+            
+            add_subdirectory(${glad_SOURCE_DIR} ${glad_BINARY_DIR})
+        endif()
+    endif()
     # ====
     # GLM
     FetchContent_Declare(
