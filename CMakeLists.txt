@@ -16,12 +16,65 @@ include(FetchContent)
     file(GLOB_RECURSE INIT_LOGGER_SOURCES CONFIGURE_DEPENDS
         src/InitTools/InitLogger/*.cpp
     )
-    add_library(InitTools STATIC ${INIT_LOGGER_SOURCES})
-    target_link_libraries(InitTools PUBLIC spdlog)
-    
+
+# INIT_TOOLS -> INIT_WINDOW:
+    # GLFW
+    FetchContent_Declare(
+            glfw
+            GIT_REPOSITORY https://github.com/glfw/glfw.git
+            GIT_TAG        3.4
+    )
+    FetchContent_MakeAvailable(glfw)
+    # ====
+    # GLAD
+    FetchContent_Declare(
+            glad
+            GIT_REPOSITORY https://github.com/Dav1dde/glad.git
+            GIT_TAG        v0.1.36
+    )
+    FetchContent_Populate(glad)
+    set(GLAD_CMAKE_FILE "${glad_SOURCE_DIR}/CMakeLists.txt")
+    file(READ "${GLAD_CMAKE_FILE}" GLAD_CMAKE_CONTENTS)
+    string(REGEX REPLACE
+        "cmake_minimum_required\\(VERSION[ \t]+3\\.0[^\)]*\\)"
+        "cmake_minimum_required(VERSION 3.5)"
+        GLAD_CMAKE_CONTENTS "${GLAD_CMAKE_CONTENTS}"
+    )
+    file(WRITE "${GLAD_CMAKE_FILE}" "${GLAD_CMAKE_CONTENTS}")
+    add_subdirectory(${glad_SOURCE_DIR} ${glad_BINARY_DIR})
+    # ====
+    # GLM
+    FetchContent_Declare(
+            glm
+            GIT_REPOSITORY https://github.com/g-truc/glm.git
+            GIT_TAG        1.0.1
+    )
+    FetchContent_MakeAvailable(glm)
+    # ===
+    find_package(OpenGL REQUIRED)
+    file(GLOB_RECURSE INIT_WINDOW_SOURCES CONFIGURE_DEPENDS
+        src/InitTools/InitWindow/*.cpp
+    )
+
+add_library(InitTools STATIC
+    ${INIT_LOGGER_SOURCES}
+    ${INIT_WINDOW_SOURCES}
+)
+target_link_libraries(InitTools PRIVATE
+    spdlog # InitLogger
+    glfw glad glm # InitWindow
+)
+
 target_compile_features(InitTools PUBLIC cxx_std_17)
 
 target_include_directories(InitTools
+    PRIVATE
+        # InitLogger
+        ${spdlog_SOURCE_DIR}/include
+        # InitWindow
+        ${glfw_SOURCE_DIR}/include
+        ${glad_SOURCE_DIR}/include
+        ${glm_SOURCE_DIR}
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>

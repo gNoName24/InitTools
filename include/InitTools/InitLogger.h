@@ -1,7 +1,11 @@
 #ifndef NONAME24_INITTOOLS_INIT_LOGGER_H
 #define NONAME24_INITTOOLS_INIT_LOGGER_H
 
+// Зависмости:
+//      spdlog v1.15.3
+
 #include <memory>
+#include <unordered_map>
 
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
@@ -9,6 +13,11 @@
 
 namespace InitLogger {
     extern std::shared_ptr<spdlog::logger> logger;
+    extern std::string logger_name;
+    extern int source_loc_width;
+    extern std::unordered_map<std::string, std::string> levels;
+    extern std::string pattern;
+
     void initLogger();
 
     #define log_trace(fmt, ...)    logger->log(spdlog::source_loc{__FILE__, __LINE__, __func__}, spdlog::level::trace, fmt, ##__VA_ARGS__)
