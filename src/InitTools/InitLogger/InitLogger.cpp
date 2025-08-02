@@ -11,8 +11,6 @@ namespace InitLogger {
         {"default", "?"}
     };
     std::string pattern = "[%^%S%$] [%T] [%L] %v";
-    // filefunc ; funcline
-    // std::string format_filefunc = "filefunc";
 
     void initLogger() {
         logger = spdlog::stdout_color_mt(logger_name);
