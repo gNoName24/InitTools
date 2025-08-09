@@ -25,7 +25,7 @@ namespace InitTools {
                         { "initGLAD_init_fail", "Неудачная инициализация GLAD" },
                         { "newWindow_InitLogger_nullptr", "InitLogger не был инициализирован на момент создания нового окна, так что он был инициализирован" },
                         { "InitWindow_WindowClass::initWindow_start", "Инициализация GLFW окна" },
-                        { "InitWindow_WindowClass::initWindow_window_nullptr", "GLFW окно не создалось" },
+                        { "InitWindow_WindowClass::initWindow_window_nullptr", "GLFW окно не создалось, window == nullptr" },
                         { "InitWindow_WindowClass::render_thread_start_GLAD_noload", "GLAD не инициализирован в потоке рендера" },
                     }}
                 }

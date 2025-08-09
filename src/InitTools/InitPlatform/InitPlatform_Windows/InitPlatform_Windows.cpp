@@ -1,10 +1,6 @@
 #include <InitTools/InitPlatform/InitPlatform_Windows.h>
 #include <InitTools/InitPlatform.h>
 
-#if defined(_WIN32) || defined(_WIN64)
-#include <windows.h>
-#endif
-
 namespace InitPlatform_Windows {
     std::string getRegistryString(const std::wstring& fullPath, const std::wstring& valueName) {
 #if defined(_WIN32) || defined(_WIN64)

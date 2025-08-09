@@ -25,20 +25,20 @@ namespace InitWindow {
         frame_count++;
     }
 
-    void InitWindow_WindowClass::while_glfwPollEvents() {
+    void InitWindow_WindowClass::while_glfwEvents() {
         glfwPollEvents();
     }
 
     void InitWindow_WindowClass::while_start() {
         while(!glfwWindowShouldClose(window)) {
-            while_glfwPollEvents();
+            while_glfwEvents();
         }
     }
 
     std::string InitWindow_WindowClass::getTitle() {
         return glfwGetWindowTitle(window);
     }
-    void InitWindow_WindowClass::setTitle(std::string title) {
+    void InitWindow_WindowClass::setTitle(std::string& title) {
         glfwSetWindowTitle(window, title.c_str());
     }
 };

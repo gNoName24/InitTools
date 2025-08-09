@@ -16,9 +16,12 @@
 
 // Зависимости C++
 #include <string>
-// #if defined(_WIN32) || defined(_WIN64)
-// #include <windows.h>
-// #endif
+#if defined(_WIN32) || defined(_WIN64)
+    #include <windows.h>
+#elif defined(__linux__)
+    #include <unistd.h>
+    #include <limits.h>
+#endif
 
 // Модульные зависимости
 // #include <InitTools/InitTools.h> <- В .cpp

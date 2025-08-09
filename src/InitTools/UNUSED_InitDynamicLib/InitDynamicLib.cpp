@@ -1,3 +1,4 @@
+/*
 #include <InitTools/InitDynamicLib.h>
 
 namespace InitDynamicLib {
@@ -101,3 +102,4 @@ namespace InitDynamicLib {
         }
     }
 }
+*/

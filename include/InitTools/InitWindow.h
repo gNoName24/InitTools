@@ -50,7 +50,7 @@ namespace InitWindow {
     class InitWindow_WindowClass {
     public:
         GLFWwindow* window;
-        std::string selfID;
+        std::string self_id;
         
         // Window
         /**
@@ -124,7 +124,7 @@ namespace InitWindow {
          */
         void render_thread_stop();
 
-        void while_glfwPollEvents();
+        void while_glfwEvents();
 
         /**
          *  \~Russian
@@ -144,7 +144,7 @@ namespace InitWindow {
          *      @brief Установка названия окна
          *      @param[in] title Новое название окна
          */
-        void setTitle(std::string title);
+        void setTitle(std::string& title);
 
         // Callbacks
 
