@@ -103,7 +103,7 @@ namespace InitWindow {
         std::atomic<bool> render_thread_running = true;
         /**
          *  \~Russian
-         *      
+         *      @brief Задержка рендера между кадрами в миллисекундах
          */
         std::atomic<int> render_thread_sleep_milliseconds = 8;
         /**
@@ -124,12 +124,14 @@ namespace InitWindow {
          */
         void render_thread_stop();
 
+        void while_glfwPollEvents();
+
         /**
          *  \~Russian
-         *      @brief Запуск бесконечного цикла для обновления событий
-         *      @details Нужен для того, чтобы потоку рендера отправлялись события.
+         *      @brief Запуск бесконечного цикла
+         *      @details Нужно запускать после запуска рендер потока
          */
-        void startWhile();
+        void while_start();
 
         /**
          *  \~Russian

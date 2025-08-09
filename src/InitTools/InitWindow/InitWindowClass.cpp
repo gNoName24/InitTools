@@ -25,6 +25,16 @@ namespace InitWindow {
         frame_count++;
     }
 
+    void InitWindow_WindowClass::while_glfwPollEvents() {
+        glfwPollEvents();
+    }
+
+    void InitWindow_WindowClass::while_start() {
+        while(!glfwWindowShouldClose(window)) {
+            while_glfwPollEvents();
+        }
+    }
+
     std::string InitWindow_WindowClass::getTitle() {
         return glfwGetWindowTitle(window);
     }
