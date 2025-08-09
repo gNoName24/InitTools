@@ -41,7 +41,7 @@ namespace InitTools {
             if(keyIt == modIt->second.end()) return unknown;
             return keyIt->second;
         }
-        const std::string_view getSmart(const char* module, const char* key) {
+        const std::string_view gets(const char* module, const char* key) {
             return get(locale, module, key);
         }
     };
