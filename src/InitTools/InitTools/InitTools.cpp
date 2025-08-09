@@ -31,7 +31,7 @@ namespace InitTools {
                 }
             }
         };
-        const std::string_view get(const char* locale, const char* module, const char* key) {
+        const std::string_view get(const std::string_view lang, const std::string_view module, const std::string_view key) {
             static constexpr std::string_view unknown = "[unknown]";
             auto langIt = langtable.find(locale);
             if(langIt == langtable.end()) return unknown;
@@ -41,7 +41,7 @@ namespace InitTools {
             if(keyIt == modIt->second.end()) return unknown;
             return keyIt->second;
         }
-        const std::string_view gets(const char* module, const char* key) {
+        const std::string_view gets(const std::string_view module, const std::string_view key) {
             return get(locale, module, key);
         }
     };
