@@ -1,14 +1,15 @@
 #include <InitTools/InitWindow.h>
 
 // Модульные зависимости
+#include <InitTools/InitTools.h>
 #include <InitTools/InitConsole.h>
 
 namespace InitWindow {
-    void InitWindowClass::render_thread_start(std::function<void()> renderCallback) {
+    void InitWindow_WindowClass::render_thread_start(std::function<void()> renderCallback) {
         render_thread = std::thread([this, renderCallback]() {
             glfwMakeContextCurrent(window);
             if(!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
-                log_error("GLAD не инициализирован в потоке рендера");
+                log_error(InitTools::Localization::gets("InitWindow", "InitWindow_WindowClass::render_thread_start_GLAD_noload"));
                 return;
             }
 
@@ -22,7 +23,7 @@ namespace InitWindow {
             render_thread_running = false;
         });
     }
-    void InitWindowClass::render_thread_stop() {
+    void InitWindow_WindowClass::render_thread_stop() {
         render_thread_running = false;
         if(render_thread.joinable()) {
             render_thread.join();

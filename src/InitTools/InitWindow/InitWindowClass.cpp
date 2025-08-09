@@ -1,15 +1,16 @@
+#include "InitTools/InitTools.h"
 #include <InitTools/InitWindow.h>
 
 // Модульные зависимости
 #include <InitTools/InitConsole.h>
 
 namespace InitWindow {
-    void InitWindowClass::initWindow() {
-        log_info("Инициализация GLFW окна");
+    void InitWindow_WindowClass::initWindow() {
+        log_info(InitTools::Localization::gets("InitWindow", "InitWindow_WindowClass::initWindow_start"));
         window = glfwCreateWindow(window_size.x, window_size.y, "Window", nullptr, nullptr);
         if(window == nullptr) {
             glfwTerminate();
-            log_error("GLFW окно не создалось");
+            log_error(InitTools::Localization::gets("InitWindow", "InitWindow_WindowClass::initWindow_window_nullptr"));
         }
         glfwMakeContextCurrent(window);
 
@@ -20,14 +21,14 @@ namespace InitWindow {
 
         glfwMakeContextCurrent(nullptr);
     }
-    void InitWindowClass::update() {
+    void InitWindow_WindowClass::update() {
         frame_count++;
     }
 
-    std::string InitWindowClass::getTitle() {
+    std::string InitWindow_WindowClass::getTitle() {
         return glfwGetWindowTitle(window);
     }
-    void InitWindowClass::setTitle(std::string title) {
+    void InitWindow_WindowClass::setTitle(std::string title) {
         glfwSetWindowTitle(window, title.c_str());
     }
 };

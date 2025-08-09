@@ -7,7 +7,7 @@
 namespace InitWindow {
     int opengl_version_major = 3;
     int opengl_version_minor = 3;
-    std::unordered_map<std::string, InitWindowClass> Windows = {};
+    std::unordered_map<std::string, InitWindow_WindowClass> Windows = {};
 
     void initGLFW() {
         log_info(InitTools::Localization::gets("InitWindow", "initGLFW_init"));

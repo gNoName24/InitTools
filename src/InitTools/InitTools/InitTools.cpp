@@ -1,6 +1,7 @@
 #include <InitTools/InitTools.h>
 
 #include <InitTools/InitConsole.h>
+#include <InitTools/InitPlatform.h>
 
 namespace InitTools {
     unsigned char VERSION_MAJOR = 2;
@@ -10,6 +11,7 @@ namespace InitTools {
     void starter() {
         InitConsole::Logger::init();
         log_info("InitTools v{}.{}.{}", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
+        log_info("InitTools: Operating System - ", InitPlatform::getOS());
     }
 
     const char* locale = "RU";
@@ -21,7 +23,10 @@ namespace InitTools {
                         { "initGLFW_init_fail", "Неудачная инициализация GLFW" },
                         { "initGLAD_init", "Инициализация GLAD" },
                         { "initGLAD_init_fail", "Неудачная инициализация GLAD" },
-                        { "newWindow_InitLogger_nullptr", "InitLogger не был инициализирован на момент создания нового окна, так что он был инициализирован" }
+                        { "newWindow_InitLogger_nullptr", "InitLogger не был инициализирован на момент создания нового окна, так что он был инициализирован" },
+                        { "InitWindow_WindowClass::initWindow_start", "Инициализация GLFW окна" },
+                        { "InitWindow_WindowClass::initWindow_window_nullptr", "GLFW окно не создалось" },
+                        { "InitWindow_WindowClass::render_thread_start_GLAD_noload", "GLAD не инициализирован в потоке рендера" },
                     }}
                 }
             }
