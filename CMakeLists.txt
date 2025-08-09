@@ -1,11 +1,14 @@
 cmake_minimum_required(VERSION 3.24)
-project(InitTools VERSION 1.0.3 LANGUAGES CXX)
+project(InitTools VERSION 1.1.0 LANGUAGES CXX)
 
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -save-temps -O2")
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions -fno-rtti")
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Oz")
 set(CMAKE_CXX_STANDARD 20)
 
-message(STATUS "InitTools: Version 1.0.3")
+message(STATUS "InitTools: Version ${PROJECT_VERSION}")
 
-option(INITTOOLS_BUILD_DEBUG "Дебаг билд" ON)
+option(INITTOOLS_BUILD_DEBUG "InitTools Debug Build" OFF)
 
 if(INITTOOLS_BUILD_DEBUG)
     message(STATUS "InitTools: Build Debug")
@@ -15,23 +18,57 @@ else()
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif()
 
+option(INITTOOLS_ENABLE_INITPLATFORM "Enable Module InitPlatform" ON)
+option(INITTOOLS_ENABLE_INITCONSOLE "Enable Module InitConsole" ON)
+option(INITTOOLS_ENABLE_INITWINDOW "Enable Module InitWindow" ON)
+
 include(FetchContent)
 
-# INIT_TOOLS -> INIT_LOGGER:
-    message(STATUS "InitTools: INITTOOLS -> INIT_LOGGER ~ spdlog v1.15.3")
-    FetchContent_Declare( # spdlog
-        spdlog
-        GIT_REPOSITORY https://github.com/gabime/spdlog.git
-        GIT_TAG        v1.15.3
-    )
-    FetchContent_MakeAvailable(spdlog)
-    file(GLOB_RECURSE INIT_LOGGER_SOURCES CONFIGURE_DEPENDS
-        src/InitTools/InitLogger/*.cpp
+message(STATUS "InitTools: INITTOOLS -> INITTOOLS")
+# INIT_TOOLS -> INIT_TOOLS:
+    file(GLOB_RECURSE INITTOOLS_SOURCES CONFIGURE_DEPENDS
+        src/InitTools/InitTools/*.cpp
     )
 
+if(INITTOOLS_ENABLE_INITPLATFORM)
+message(STATUS "InitTools: INITTOOLS -> INITPLATFORM")
+# INIT_TOOLS -> INIT_PLATFORM:
+    message(STATUS "InitTools: INITTOOLS -> INITPLATFORM ~> WINDOWS")
+    # INIT_TOOLS -> INIT_PLATFORM ~> WINDOWS:
+        
+    file(GLOB_RECURSE INITPLATFORM_SOURCES CONFIGURE_DEPENDS
+        src/InitTools/InitPlatform/*.cpp
+        src/InitTools/InitPlatform/InitPlatform_Windows/*.cpp
+    )
+else()
+message(STATUS "InitTools: INITTOOLS_ENABLE_INITPLATFORM disabled")
+endif()
+
+if(INITTOOLS_ENABLE_INITCONSOLE)
+message(STATUS "InitTools: INITTOOLS -> INITCONSOLE")
+# INIT_TOOLS -> INIT_CONSOLE:
+    message(STATUS "InitTools: INITTOOLS -> INITCONSOLE ~> LOGGER")
+    # INIT_TOOLS -> INIT_CONSOLE ~> LOGGER:
+        message(STATUS "InitTools: INITTOOLS -> INITCONSOLE ~> LOGGER ~ spdlog v1.15.3")
+        FetchContent_Declare( # spdlog
+            spdlog
+            GIT_REPOSITORY https://github.com/gabime/spdlog.git
+            GIT_TAG        v1.15.3
+        )
+        FetchContent_MakeAvailable(spdlog)
+    file(GLOB_RECURSE INITCONSOLE_SOURCES CONFIGURE_DEPENDS
+        src/InitTools/InitConsole/*.cpp
+        src/InitTools/InitConsole/InitConsole_Logger/*.cpp
+    )
+else()
+message(STATUS "InitTools: INITTOOLS_ENABLE_INITCONSOLE disabled")
+endif()
+
+if(INITTOOLS_ENABLE_INITWINDOW)
+message(STATUS "InitTools: INITTOOLS -> INITWINDOW")
 # INIT_TOOLS -> INIT_WINDOW:
     # GLFW
-    message(STATUS "InitTools: INITTOOLS -> INIT_WINDOW ~ GLFW 3.4")
+    message(STATUS "InitTools: INITTOOLS -> INITWINDOW ~ GLFW 3.4")
     FetchContent_Declare(
             glfw
             GIT_REPOSITORY https://github.com/glfw/glfw.git
@@ -39,7 +76,7 @@ include(FetchContent)
     )
     FetchContent_MakeAvailable(glfw)
     # ====
-    message(STATUS "InitTools: INITTOOLS -> INIT_WINDOW ~ GLAD v0.1.36")
+    message(STATUS "InitTools: INITTOOLS -> INITWINDOW ~ GLAD v0.1.36")
     # GLAD - 
     set(GLAD_PATCH ${CMAKE_CURRENT_SOURCE_DIR}/patches/glad-set-min-cmake-3.24.patch)
     FetchContent_Declare(
@@ -55,7 +92,7 @@ include(FetchContent)
     # ====
     # GLM
     set(GLM_PATCH ${CMAKE_CURRENT_SOURCE_DIR}/patches/glm-set-min-cmake-3.24.patch)
-    message(STATUS "InitTools: INITTOOLS -> INIT_WINDOW ~ GLM 1.0.1")
+    message(STATUS "InitTools: INITTOOLS -> INITWINDOW ~ GLM 1.0.1")
     FetchContent_Declare(
             glm
             GIT_REPOSITORY https://github.com/g-truc/glm.git
@@ -68,29 +105,64 @@ include(FetchContent)
     FetchContent_MakeAvailable(glm)
     # ===
     find_package(OpenGL REQUIRED)
-    file(GLOB_RECURSE INIT_WINDOW_SOURCES CONFIGURE_DEPENDS
+    file(GLOB_RECURSE INITWINDOW_SOURCES CONFIGURE_DEPENDS
         src/InitTools/InitWindow/*.cpp
     )
+else()
+message(STATUS "InitTools: INITTOOLS_ENABLE_INITWINDOW disabled")
+endif()
+
+# add_library
+set(INITTOOLS_ADD_LIBRARY
+    ${INITPLATFORM_SOURCES}
+    ${INITCONSOLE_SOURCES}
+    ${INITWINDOW_SOURCES}
+)
+if(INITTOOLS_ENABLE_INITPLATFORM)
+    list(APPEND INITTOOLS_ADD_LIBRARY ${INITPLATFORM_SOURCES})
+endif()
+if(INITTOOLS_ENABLE_INITCONSOLE) # InitConsole
+    list(APPEND INITTOOLS_ADD_LIBRARY ${INITCONSOLE_SOURCES})
+endif()
+if(INITTOOLS_ENABLE_INITWINDOW) # InitWindow
+    list(APPEND INITTOOLS_ADD_LIBRARY ${INITWINDOW_SOURCES})
+endif()
 
 add_library(InitTools STATIC
-    ${INIT_LOGGER_SOURCES}
-    ${INIT_WINDOW_SOURCES}
+    ${INITTOOLS_SOURCES}
+    ${INITTOOLS_ADD_LIBRARY}
 )
 target_compile_features(InitTools PUBLIC cxx_std_20)
 
+# target_link_libraries
+set(INITTOOLS_TARGET_LINK_LIBRARIES)
+if(INITTOOLS_ENABLE_INITPLATFORM) # InitPlatform
+
+endif()
+if(INITTOOLS_ENABLE_INITCONSOLE) # InitConsole
+    list(APPEND INITTOOLS_TARGET_LINK_LIBRARIES spdlog)
+endif()
+if(INITTOOLS_ENABLE_INITWINDOW) # InitWindow
+    list(APPEND INITTOOLS_TARGET_LINK_LIBRARIES glfw glad glm)
+endif()
 target_link_libraries(InitTools PRIVATE
-    spdlog # InitLogger
-    glfw glad glm # InitWindow
+    ${INITTOOLS_TARGET_LINK_LIBRARIES}
 )
 
+# target_include_directories
+set(INITTOOLS_TARGET_INCLUDE_DIRECTORIES)
+if(INITTOOLS_ENABLE_INITPLATFORM) # InitPlatform
+
+endif()
+if(INITTOOLS_ENABLE_INITCONSOLE) # InitConsole
+    list(APPEND INITTOOLS_TARGET_INCLUDE_DIRECTORIES ${spdlog_SOURCE_DIR}/include)
+endif()
+if(INITTOOLS_ENABLE_INITWINDOW) # InitWindow
+    list(APPEND INITTOOLS_TARGET_INCLUDE_DIRECTORIES ${glfw_SOURCE_DIR}/include ${glad_SOURCE_DIR}/include ${glm_SOURCE_DIR})
+endif()
 target_include_directories(InitTools
     PRIVATE
-        # InitLogger
-        ${spdlog_SOURCE_DIR}/include
-        # InitWindow
-        ${glfw_SOURCE_DIR}/include
-        ${glad_SOURCE_DIR}/include
-        ${glm_SOURCE_DIR}
+    ${INITTOOLS_TARGET_INCLUDE_DIRECTORIES}
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>

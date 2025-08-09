@@ -1,0 +1,8 @@
+#ifndef NONAME24_INITTOOLS_INIT_FILES_H
+#define NONAME24_INITTOOLS_INIT_FILES_H
+
+namespace InitFiles {
+    
+};
+
+#endif // NONAME24_INITTOOLS_INIT_FILES_H
