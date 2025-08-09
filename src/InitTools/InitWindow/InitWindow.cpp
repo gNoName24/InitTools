@@ -33,8 +33,8 @@ namespace InitWindow {
             InitConsole::Logger::init();
             log_info(InitTools::Localization::gets("InitWindow", "newWindow_InitLogger_nullptr"));
         }
-        Windows.try_emplace(id);
-        Windows[id].selfID = id;
-        Windows[id].initWindow();
+        windows.try_emplace(id);
+        windows[id].selfID = id;
+        windows[id].initWindow();
     }
 };
