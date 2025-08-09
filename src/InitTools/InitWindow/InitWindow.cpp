@@ -17,8 +17,8 @@ namespace InitWindow {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, opengl_version_major);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, opengl_version_minor);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
-        glfwWindowHint(GLFW_ALPHA_BITS, 8);
+        //glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
+        //glfwWindowHint(GLFW_ALPHA_BITS, 8);
     }
 
     void initGLAD() {
