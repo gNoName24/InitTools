@@ -1,9 +1,16 @@
 #include <InitTools/InitTools.h>
 
+#include <InitTools/InitConsole.h>
+
 namespace InitTools {
     unsigned char VERSION_MAJOR = 2;
     unsigned char VERSION_MINOR = 0;
     unsigned char VERSION_PATCH = 0;
+
+    void starter() {
+        InitConsole::Logger::init();
+        log_info("InitTools v{}.{}.{}", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
+    }
 
     const char* locale = "RU";
     namespace Localization {

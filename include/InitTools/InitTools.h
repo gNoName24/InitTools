@@ -67,6 +67,14 @@ namespace InitTools {
      */
     extern unsigned char VERSION_PATCH;
 
+    /**
+     *  \~Russian
+     *      @brief Стартовое сообщение
+     *  \~English
+     *      @brief Starter message
+     */
+    void starter();
+
     /**\~Russian
      * @brief Язык библиотеки
      * @details Указанный язык используется во всех модулях этой библиотеки.\n
