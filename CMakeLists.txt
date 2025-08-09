@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.24)
-project(InitTools VERSION 1.1.0 LANGUAGES CXX)
+project(InitTools VERSION 2.0.0 LANGUAGES CXX)
 
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -save-temps -O2")
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions -fno-rtti")
@@ -8,15 +8,16 @@ set(CMAKE_CXX_STANDARD 20)
 
 message(STATUS "InitTools: Version ${PROJECT_VERSION}")
 
-option(INITTOOLS_BUILD_DEBUG "InitTools Debug Build" OFF)
+#option(INITTOOLS_BUILD_DEBUG "InitTools Debug Build" OFF)
+#if(INITTOOLS_BUILD_DEBUG)
+#    message(STATUS "InitTools: Build Debug")
+#    set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
+#else()
+#    message(STATUS "InitTools: Build Release")
+#    set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+#endif()
 
-if(INITTOOLS_BUILD_DEBUG)
-    message(STATUS "InitTools: Build Debug")
-    set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
-else()
-    message(STATUS "InitTools: Build Release")
-    set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
-endif()
+message(STATUS "InitTools: Build Type - ${CMAKE_BUILD_TYPE}")
 
 option(INITTOOLS_ENABLE_INITPLATFORM "Enable Module InitPlatform" ON)
 option(INITTOOLS_ENABLE_INITCONSOLE "Enable Module InitConsole" ON)
