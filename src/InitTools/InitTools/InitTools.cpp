@@ -11,7 +11,6 @@ namespace InitTools {
     void starter() {
         InitConsole::Logger::init();
         log_info("InitTools v{}.{}.{}", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
-        log_info("InitTools: Operating System - ", InitPlatform::getOS());
     }
 
     const char* locale = "RU";
@@ -27,6 +26,9 @@ namespace InitTools {
                         { "InitWindow_WindowClass::initWindow_start", "Инициализация GLFW окна" },
                         { "InitWindow_WindowClass::initWindow_window_nullptr", "GLFW окно не создалось, window == nullptr" },
                         { "InitWindow_WindowClass::render_thread_start_GLAD_noload", "GLAD не инициализирован в потоке рендера" },
+                    }},
+                    {"InitFiles", {
+                        { "", "" }
                     }}
                 }
             }
