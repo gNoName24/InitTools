@@ -2,7 +2,6 @@
 #include <InitTools/InitFiles.h>
 
 // C++ Зависимости
-#include <fstream>
 
 // Модульные зависимости
 #include <InitTools/InitConsole.h>
@@ -74,25 +73,30 @@ namespace InitFiles {
     bool is_file(std::filesystem::path path) {
         return std::filesystem::is_regular_file(path);
     }
-    bool file_opened(std::filesystem::path path) {
-        if(path_exists(path)) {
-            if(is_file(path)) {
-                return true;
-            } else {
-                error = true;
-                error_function = "file_open";
-                error_code = "is_file(path)";
-                return false;
+    bool file_opened(std::filesystem::path path, bool need_file_exists) {
+        std::filesystem::path directory = path.parent_path();
+        std::filesystem::path file = path.filename();
+        error_function = "file_opened";
+
+        if(path_exists(directory)) { // Если директория для создания туда файла существует
+            if(!need_file_exists) { // Если не нужно проверять наличие уже существующего файла
+                if(!path_exists(path)) { // Если файл по пути еще не существует
+                    return true;
+                } else {
+                    error = true;
+                    error_code = "!path_exists(path)";
+                    return false;
+                }
             }
+            return true;
         } else {
             error = true;
-            error_function = "file_open";
-            error_code = "!path_exists(path)";
+            error_code = "path_exists(directory)";
             return false;
         }
     }
 
-    std::string file_get_text_full(std::ifstream file) {
+    std::string file_get_text_full(std::fstream file) {
         std::ostringstream ss;
         ss << file.rdbuf();
         return ss.str();

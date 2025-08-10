@@ -18,6 +18,7 @@
 // C++ зависимости
 #include <string>
 #include <filesystem>
+#include <fstream>
 
 /** @ingroup InitFiles
  * \~Russian
@@ -101,7 +102,7 @@ namespace InitFiles {
      *      @brief Проверка на валидность пути для безопасного открытия файла
      *      @details Ошибки вносяться во внутренние переменные. Ознакомьтесь с error_* функциями и переменными.
      */
-    bool file_opened(std::filesystem::path path);
+    bool file_opened(std::filesystem::path path, bool need_file_exists);
 
     /**
      *  \~Russian
