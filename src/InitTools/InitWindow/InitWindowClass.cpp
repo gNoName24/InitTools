@@ -5,7 +5,7 @@
 #include <InitTools/InitConsole.h>
 
 namespace InitWindow {
-    void InitWindow_WindowClass::initWindow() {
+    void InitWindow_WindowClass::init_window() {
         log_info(InitTools::Localization::gets("InitWindow", "InitWindow_WindowClass::initWindow_start"));
         window = glfwCreateWindow(window_size.x, window_size.y, "Window", nullptr, nullptr);
         if(window == nullptr) {
@@ -35,10 +35,10 @@ namespace InitWindow {
         }
     }
 
-    std::string InitWindow_WindowClass::getTitle() {
+    std::string InitWindow_WindowClass::get_title() {
         return glfwGetWindowTitle(window);
     }
-    void InitWindow_WindowClass::setTitle(std::string& title) {
+    void InitWindow_WindowClass::set_title(std::string& title) {
         glfwSetWindowTitle(window, title.c_str());
     }
 };

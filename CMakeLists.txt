@@ -4,9 +4,10 @@ project(InitTools VERSION 2.0.0 LANGUAGES CXX)
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -save-temps -O2")
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions -fno-rtti")
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Oz")
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 
 message(STATUS "InitTools: Version ${PROJECT_VERSION}")
+message(STATUS "InitTools: CMake CXX Standart ${CMAKE_CXX_STANDARD}")
 
 #option(INITTOOLS_BUILD_DEBUG "InitTools Debug Build" OFF)
 #if(INITTOOLS_BUILD_DEBUG)
@@ -16,6 +17,12 @@ message(STATUS "InitTools: Version ${PROJECT_VERSION}")
 #    message(STATUS "InitTools: Build Release")
 #    set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 #endif()
+
+# Порядок модулей:
+# 1. InitPlatform
+# 2. InitFiles
+# 3. InitConsole
+# 4. InitWindow
 
 message(STATUS "InitTools: Build Type - ${CMAKE_BUILD_TYPE}")
 

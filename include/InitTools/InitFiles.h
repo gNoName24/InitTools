@@ -1,24 +1,34 @@
-/**
- * @defgroup InitFiles
- * \~Russian
- *     @brief Модуль InitFiles
- * \~English
- *     @brief Module InitFiles
+// InitFiles
+/** @defgroup InitFiles
+ *  \~Russian
+ *      @brief Модуль InitFiles
+ *  \~English
+ *      @brief Module InitFiles
  */
 /**
- * @file InitFiles.h
- * \~Russian
- *     @brief Модуль InitFiles
- * \~English
- *     @brief Module InitFiles
+ *  @file InitFiles.h
+ *  \~Russian
+ *      @brief Модуль InitFiles
+ *  \~English
+ *      @brief Module InitFiles
  */
+///////////////////////////////
 #ifndef NONAME24_INITTOOLS_INITFILES_H
 #define NONAME24_INITTOOLS_INITFILES_H
 
-// C++ зависимости
-#include <string>
-#include <filesystem>
-#include <fstream>
+// InitFiles:
+    // C++ Зависимости
+    #include <string>
+    #include <filesystem>
+    #include <fstream>
+
+    // Библиотечные зависимости
+    // #
+
+    // Модульные зависимости
+    // #include <InitTools/InitPlatform.h> <- в InitFiles.cpp
+
+/////////////////////////////////////////////////////////////
 
 /** @ingroup InitFiles
  * \~Russian
@@ -30,6 +40,7 @@ namespace InitFiles {
     /** @addtogroup InitFiles
      *  @{
      */
+
     extern bool error;
     extern std::string error_function;
     extern std::string error_code;
@@ -103,10 +114,27 @@ namespace InitFiles {
      *      @details Ошибки вносяться во внутренние переменные. Ознакомьтесь с error_* функциями и переменными.
      */
     bool file_opened(std::filesystem::path path, bool need_file_exists);
+    
+    /**
+     *  \~Russian
+     *      @brief Чтение и получение определенной строки с std::ifstream
+     *      @param[in] file Открытый файл
+     *      @param[in] line Строка, которую нужно прочитать (начинатся с 0)
+     */
+    std::string file_get_text_line(std::ifstream file, int line);
 
     /**
      *  \~Russian
-     *      @brief Чтение и получение всего текста с std::ifstream
+     *      @brief Чтение и получение указанного диапазона строк с std::ifstream
+     *      @param[in] file Открытый файл
+     *      @param[in] start С какой строчки начинать
+     *      @param[in] end На какой строке закончить
+     */
+    std::string file_get_text_for(std::ifstream file, int start, int end);
+
+    /**
+     *  \~Russian
+     *      @brief Чтение и получение всего текста с std::fstream
      *      @param[in] file Открытый файл
      */
     std::string file_get_text_full(std::ifstream file);

@@ -1,12 +1,17 @@
-#include "InitTools/InitTools.h"
+// InitFiles
 #include <InitTools/InitFiles.h>
 
 // C++ Зависимости
+// #
+
+// Библиотечные зависимости
+// #
 
 // Модульные зависимости
-#include <InitTools/InitConsole.h>
-#include <InitTools/InitPlatform.h>
+#include "InitTools/InitTools.h"
+#include <InitTools/InitPlatform.h> 
 
+// InitFiles
 namespace InitFiles {
     bool error = false;
     std::string error_function = "";
@@ -96,7 +101,21 @@ namespace InitFiles {
         }
     }
 
-    std::string file_get_text_full(std::fstream file) {
+    std::string file_get_text_line(std::ifstream file, int line) {
+        std::string output;
+        for(int i = 1; i <= line && std::getline(file, output); ++i) {
+            if(i == line) return output;
+        }
+        return {};
+    }
+
+    std::string file_get_text_for(std::ifstream file, int start, int end) {
+        std::string output;
+        for(int i = start; i <= end && std::getline(file, output); ++i) {}
+        return output;
+    }
+
+    std::string file_get_text_full(std::ifstream file) {
         std::ostringstream ss;
         ss << file.rdbuf();
         return ss.str();

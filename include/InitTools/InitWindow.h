@@ -1,34 +1,39 @@
-/**
- * @defgroup InitWindow
- * \~Russian
- *     @brief Модуль InitWindow
- * \~English
- *     @brief Module InitWindow
+// InitWindow
+/** @defgroup InitWindow
+ *  \~Russian
+ *      @brief Модуль InitWindow
+ *  \~English
+ *      @brief Module InitWindow
  */
 /**
- * @file InitWindow.h
- * \~Russian
- *     @brief Модуль InitWindow
- * \~English
- *     @brief Module InitWindow
+ *  @file InitWindow.h
+ *  \~Russian
+ *      @brief Модуль InitWindow
+ *  \~English
+ *      @brief Module InitWindow
  */
+////////////////////////////////
 #ifndef NONAME24_INITTOOLS_INITWINDOW_H
 #define NONAME24_INITTOOLS_INITWINDOW_H
 
-// C++ зависимости
-#include <string>
-#include <unordered_map>
-#include <atomic>
-#include <thread>
-#include <functional>
+// InitWindow:
+    // C++ Зависимости
+    #include <string>
+    #include <unordered_map>
+    #include <atomic>
+    #include <thread>
+    #include <functional>
 
-// Библиотечные зависимости
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
+    // Библиотечные зависимости
+    #include <glad/glad.h>
+    #include <GLFW/glfw3.h>
+    #include <glm/glm.hpp>
 
-// Модульные зависимости
-// #include <InitTools/InitTools.h> <- В .cpp
+    // Модульные зависимости
+    // #include <InitTools/InitTools.h> <- В InitWindow.cpp
+    // #include <InitTools/InitConsole.h> <- В InitWindow.cpp
+
+/////////////////////////////////////////////////////////////
 
 /** @ingroup InitWindow
  * \~Russian
@@ -42,10 +47,10 @@ namespace InitWindow {
      */
     
     /**
-     * \~Russian
-     *     @brief Класс окна
-     * \~English
-     *     @brief Window class
+     *  \~Russian
+     *      @brief Класс окна
+     *  \~English
+     *      @brief Window class
      */ 
     class InitWindow_WindowClass {
     public:
@@ -86,7 +91,7 @@ namespace InitWindow {
          *      @brief Инициализация окна
          *      @details Вызывается автоматически при newWindow().
          */
-        void initWindow();
+        void init_window();
 
         /**
          *  \~Russian
@@ -138,13 +143,13 @@ namespace InitWindow {
          *      @brief Получение название окна
          *      @return Название окна
          */
-        std::string getTitle();
+        std::string get_title();
         /**
          *  \~Russian
          *      @brief Установка названия окна
          *      @param[in] title Новое название окна
          */
-        void setTitle(std::string& title);
+        void set_title(std::string& title);
 
         // Callbacks
 
@@ -213,7 +218,7 @@ namespace InitWindow {
      *  \~English
      *      @brief GLFW initialization
      */
-    void initGLFW();
+    void init_GLFW();
     /**
      *  \~Russian
      *      @brief Инициализация GLAD
@@ -222,7 +227,7 @@ namespace InitWindow {
      *      @brief GLAD initialization
      *      @details When creating a window using newWindow(), it is not necessary to initialize GLAD.
      */
-    void initGLAD();
+    void init_GLAD();
     /**
      *  \~Russian
      *      @brief Создание нового окна
@@ -231,7 +236,8 @@ namespace InitWindow {
      *      @brief Creating a new window
      *      @param[in] id Window identifier in windows
      */
-    void newWindow(std::string id);
+    void new_window(std::string id);
+    
     /// @}
  };
 

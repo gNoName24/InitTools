@@ -1,7 +1,14 @@
+// InitTools
 #include <InitTools/InitTools.h>
 
+// C++ Зависимости
+// #
+
+// Библиотечные зависимости
+// #
+
+// Модульные зависимости
 #include <InitTools/InitConsole.h>
-#include <InitTools/InitPlatform.h>
 
 namespace InitTools {
     unsigned char VERSION_MAJOR = 2;
@@ -9,7 +16,9 @@ namespace InitTools {
     unsigned char VERSION_PATCH = 0;
 
     void starter() {
-        InitConsole::Logger::init();
+        if(!InitConsole::Logger::initialized()) {
+            InitConsole::Logger::init();
+        }
         log_info("InitTools v{}.{}.{}", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
     }
 
