@@ -16,10 +16,8 @@ namespace InitTools {
     unsigned char VERSION_PATCH = 0;
 
     void starter() {
-        if(!InitConsole::Logger::initialized()) {
-            InitConsole::Logger::init();
-        }
         log_info("InitTools v{}.{}.{}", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
+        log_info("InitTools: locale - {}", locale);
     }
 
     const char* locale = "RU";

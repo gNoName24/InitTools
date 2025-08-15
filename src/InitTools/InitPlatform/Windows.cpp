@@ -1,6 +1,17 @@
 // InitPlatform -> Windows
 #include <InitTools/InitPlatform.h>
 
+// C++ Зависимости
+#if defined(_WIN32) || defined(_WIN64)
+    #include <windows.h>
+#endif
+
+// Библиотечные зависимости
+// #
+
+// Модульные зависимости
+// #
+
 // InitPlatform
 namespace InitPlatform {
     // Windows

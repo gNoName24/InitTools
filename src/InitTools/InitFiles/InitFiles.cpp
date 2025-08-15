@@ -8,7 +8,7 @@
 // #
 
 // Модульные зависимости
-#include "InitTools/InitTools.h"
+#include <InitTools/InitTools.h>
 #include <InitTools/InitPlatform.h> 
 
 // InitFiles

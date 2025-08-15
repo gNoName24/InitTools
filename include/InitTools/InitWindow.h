@@ -36,10 +36,10 @@
 /////////////////////////////////////////////////////////////
 
 /** @ingroup InitWindow
- * \~Russian
- *     @brief Модуль InitWindow
- * \~English
- *     @brief Module InitWindow
+ *  \~Russian
+ *      @brief Модуль InitWindow
+ *  \~English
+ *      @brief Module InitWindow
  */
 namespace InitWindow {
     /** @addtogroup InitWindow
@@ -222,10 +222,10 @@ namespace InitWindow {
     /**
      *  \~Russian
      *      @brief Инициализация GLAD
-     *      @details При создании окна через newWindow() инициализировать GLAD не обязательно.
+     *      @details При создании окна через new_window() инициализировать GLAD не обязательно.
      *  \~English
      *      @brief GLAD initialization
-     *      @details When creating a window using newWindow(), it is not necessary to initialize GLAD.
+     *      @details When creating a window using new_window(), it is not necessary to initialize GLAD.
      */
     void init_GLAD();
     /**

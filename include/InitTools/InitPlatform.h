@@ -23,21 +23,22 @@
  *       @brief Submodule InitPlatform > Windows
  */
 //////////////////////////////////////////////////////////
+// InitPlatform -> Linux
+/**
+ *   @defgroup InitPlatform_Linux InitPlatform > Linux
+ *   @ingroup InitPlatform
+ *   \~Russian
+ *       @brief Подмодуль InitPlatform > Linux
+ *   \~English
+ *       @brief Submodule InitPlatform > Linux
+ */
+//////////////////////////////////////////////////////
 #ifndef NONAME24_INITTOOLS_INITPLATFORM_H
 #define NONAME24_INITTOOLS_INITPLATFORM_H
 
-// Зависимости C++
-#include <string>
-#if defined(_WIN32) || defined(_WIN64)
-    #include <windows.h>
-#elif defined(__linux__)
-    #include <unistd.h>
-    #include <limits.h>
-#endif
-
 // InitPlatform:
     // C++ Зависимости
-    // #
+    #include <string>
 
     // Библиотечные зависимости
     // #
@@ -48,14 +49,24 @@
 ///////////////////////////////
 // InitPlatform -> Windows:
     // C++ Зависимости
-    // #
+    // #include <windows.h> <- в Windows.cpp
 
     // Библиотечные зависимости
     // #
 
     // Модульные зависимости
     // #
-///////////////////////////////
+////////////////////////////////////////////
+// InitPlatform -> Linux:
+    // C++ Зависимости
+    // #include <unistd.h> <- в Linux.cpp
+
+    // Библиотечные зависимости
+    // #
+
+    // Модульные зависимости
+    // #
+/////////////////////////////////////////
 
 /** @ingroup InitPlatform
  *  \~Russian
@@ -120,6 +131,20 @@ namespace InitPlatform {
          *          Вернет NON если ОС не Windows.
          */
         std::string get_version_number();
+
+        /// @}
+    };
+
+    /** @ingroup InitPlatform_Linux
+     *  \~Russian
+     *      @brief Namespace подмодуля Linux в модуле InitPlatform
+     */
+    namespace Linux {
+        /** @addtogroup InitPlatform_Linux
+         *  @{
+         */
+        
+                
 
         /// @}
     };

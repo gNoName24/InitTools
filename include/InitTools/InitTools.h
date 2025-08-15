@@ -108,7 +108,8 @@ namespace InitTools {
          */
 
         using u_langtable = std::unordered_map<std::string_view, std::unordered_map<std::string_view, std::unordered_map<std::string_view, std::string_view>>>;
-        /** \~Russian
+        /**
+         *  \~Russian
          *      @brief Хранилище локализации библиотеки
          *      @details Тут хранится вся локализация данной библиотеки.\n
          *          Определение, какую локализацию использовать, определяется в переменной locale.
