@@ -11,3 +11,6 @@ build/
 
 # Тестовая документация
 doxygen/
+
+# KDevelop
+.kdev4/
