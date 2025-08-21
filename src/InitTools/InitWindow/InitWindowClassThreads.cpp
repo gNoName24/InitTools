@@ -9,7 +9,7 @@ namespace InitWindow {
         render_thread = std::thread([this, renderCallback]() {
             glfwMakeContextCurrent(window);
             if(!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
-                log_error(InitTools::Localization::gets("InitWindow", "InitWindow_WindowClass::render_thread_start_GLAD_noload"));
+                //log_error(InitTools::Localization::gets("InitWindow", "InitWindow_WindowClass::render_thread_start_GLAD_noload"));
                 return;
             }
 

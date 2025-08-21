@@ -18,9 +18,9 @@ namespace InitWindow {
     std::unordered_map<std::string, InitWindow_WindowClass> windows = {};
 
     void init_GLFW() {
-        log_info(InitTools::Localization::gets("InitWindow", "initGLFW_init"));
+        //log_info(InitTools::Localization::gets("InitWindow", "initGLFW_init"));
         if(!::glfwInit()) {
-            log_error(InitTools::Localization::gets("InitWindow", "initGLFW_init_fail"));
+            //log_error(InitTools::Localization::gets("InitWindow", "initGLFW_init_fail"));
         }
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, opengl_version_major);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, opengl_version_minor);
@@ -29,16 +29,16 @@ namespace InitWindow {
     }
 
     void init_GLAD() {
-        log_info(InitTools::Localization::gets("InitWindow", "initGLAD_init"));
+        //log_info(InitTools::Localization::gets("InitWindow", "initGLAD_init"));
         if(!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
-            log_error(InitTools::Localization::gets("InitWindow", "initGLAD_init_fail"));
+            //log_error(InitTools::Localization::gets("InitWindow", "initGLAD_init_fail"));
         }
     }
 
     void new_window(std::string id) {
         if(!InitConsole::Logger::initialized()) {
             InitConsole::Logger::init();
-            log_info(InitTools::Localization::gets("InitWindow", "newWindow_InitLogger_nullptr"));
+            //log_info(InitTools::Localization::gets("InitWindow", "newWindow_InitLogger_nullptr"));
         }
         windows.try_emplace(id);
         windows[id].self_id = id;

@@ -6,11 +6,11 @@
 
 namespace InitWindow {
     void InitWindow_WindowClass::init_window() {
-        log_info(InitTools::Localization::gets("InitWindow", "InitWindow_WindowClass::initWindow_start"));
+        //log_info(InitTools::Localization::gets("InitWindow", "InitWindow_WindowClass::initWindow_start"));
         window = glfwCreateWindow(window_size.x, window_size.y, "Window", nullptr, nullptr);
         if(window == nullptr) {
             glfwTerminate();
-            log_error(InitTools::Localization::gets("InitWindow", "InitWindow_WindowClass::initWindow_window_nullptr"));
+            //log_error(InitTools::Localization::gets("InitWindow", "InitWindow_WindowClass::initWindow_window_nullptr"));
         }
         glfwMakeContextCurrent(window);
 

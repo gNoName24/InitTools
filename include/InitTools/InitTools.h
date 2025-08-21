@@ -28,6 +28,8 @@
 
     // Модульные зависимости
     // #include <InitTools/InitConsole.h> <- в InitTools.cpp
+    // #include <InitTools/InitFiles.h> <- в InitTools.cpp
+    #include <InitTools/InitLocale.h>
 
 ////////////////////////////////////////////////////////////
 
@@ -79,6 +81,41 @@ namespace InitTools {
      */
     extern unsigned char VERSION_PATCH;
 
+    // Хранилище локалей для каждого модуля. Наследует LocaleStorage
+    struct LocaleStorageModules : InitLocale::LocaleStorage {
+        std::vector<unsigned char> replacer_primary;
+        std::vector<unsigned char> replacer_fallback;
+        LocaleStorageModules(
+            const std::string& domain_,
+            const std::vector<unsigned char>& replacer_primary_ = {0x00},
+            const std::vector<unsigned char>& replacer_fallback_ = {0x00}
+        ) {
+            domain = domain_;
+            if(replacer_primary_[0] != 0x00) {
+                replacer_primary = replacer_primary_;
+            }
+            if(replacer_fallback_[0] != 0x00) {
+                replacer_fallback = replacer_fallback_;
+            }
+        }
+    };
+    // Список всех LocaleStorageModules каждого модуля
+    struct LocaleManagers {
+        LocaleStorageModules InitTools{
+            "InitTools",
+            //{}, // Будут добавлены к следующему коммиту вместе с .pot в resources/locales/.pot
+            //{}
+        };
+        LocaleStorageModules InitWindow{"InitWindow"};
+    };
+
+    // Каждый модуль может обратиться к этой переменной
+    extern LocaleManagers locale_managers;
+    extern std::string global_locale_primary;
+    extern std::string global_locale_fallback;
+
+    void locale_module_init(LocaleManagers& locale_module_manager);
+
     /**
      *  \~Russian
      *      @brief Стартовое сообщение
@@ -86,73 +123,6 @@ namespace InitTools {
      *      @brief Starter message
      */
     void starter();
-
-    /**
-     *  \~Russian
-     *      @brief Язык библиотеки
-     *      @details Указанный язык используется во всех модулях этой библиотеки.\n
-     *          Доступные языки: RU, EN
-     *  \~English
-     *      @brief Library language
-     *      @details The specified language is used in all modules of this library.\n
-     *          Available languages: RU, EN
-     */
-    extern const char* locale;
-    
-    /** @ingroup InitTools
-     *  @brief Namespace Localization
-     */
-    namespace Localization {
-        /** @addtogroup InitTools
-         *  @{
-         */
-
-        using u_langtable = std::unordered_map<std::string_view, std::unordered_map<std::string_view, std::unordered_map<std::string_view, std::string_view>>>;
-        /**
-         *  \~Russian
-         *      @brief Хранилище локализации библиотеки
-         *      @details Тут хранится вся локализация данной библиотеки.\n
-         *          Определение, какую локализацию использовать, определяется в переменной locale.
-         *  \~English
-         *      @brief Library localization storage
-         *      @details This is where all the localization for this library is stored.\n
-         *          The locale to use is specified in the locale variable.
-         */
-        extern const u_langtable langtable;
-        
-        /**
-         *  \~Russian
-         *      @brief Получение значения по указанному пути
-         *      @param[in] lang Ключ локали
-         *      @param[in] module Ключ модуля
-         *      @param[in] key Основной ключ
-         *      @return Значение из langtable
-         *  \~English
-         *      @brief Obtaining the value at the specified path
-         *      @param[in] lang Locale key
-         *      @param[in] module Module key
-         *      @param[in] key Main key
-         *      @return Value from langtable
-         */
-        extern const std::string_view get(const std::string_view lang, const std::string_view module, const std::string_view key);
-        /**
-         *  \~Russian
-         *      @brief Получение значения по указанному пути без необходимости указывать локаль
-         *      @param[in] module Ключ модуля
-         *      @param[in] key Основной ключ
-         *      @return Значение из langtable
-         *      @details Локаль получается из переменной locale.
-         *  \~English
-         *      @brief Obtaining a value from the specified path without having to specify the locale
-         *      @param[in] module Module key
-         *      @param[in] key Main key
-         *      @return Value from langtable
-         *      @details The locale is obtained from the locale variable.
-         */
-        extern const std::string_view gets(const std::string_view module, const std::string_view key);
-        
-        /// @}
-    };
 
     /// @}
 };

@@ -19,6 +19,7 @@
 // InitFiles:
     // C++ Зависимости
     #include <string>
+    #include <vector>
     #include <filesystem>
     #include <fstream>
 
@@ -41,9 +42,41 @@ namespace InitFiles {
      *  @{
      */
 
-    extern bool error;
-    extern std::string error_function;
-    extern std::string error_code;
+    // Исключения
+    class runtime_error : public std::runtime_error {
+    public:
+        explicit runtime_error(const std::string& msg) : std::runtime_error(msg) {}
+    };
+    // Файл есть
+    class FileExists : public runtime_error {
+    public:
+        explicit FileExists(const std::string& path)
+        : runtime_error("File exists: " + path) {}
+    };
+    // Файла нет
+    class FileNoExists : public runtime_error {
+    public:
+        explicit FileNoExists(const std::string& path)
+        : runtime_error("File no exists: " + path) {}
+    };
+    // Директория есть
+    class DirectoryExists : public runtime_error {
+    public:
+        explicit DirectoryExists(const std::string& path)
+        : runtime_error("Directory exists: " + path) {}
+    };
+    // Директории нет
+    class DirectoryNoExists : public runtime_error {
+    public:
+        explicit DirectoryNoExists(const std::string& path)
+        : runtime_error("Directory no exists: " + path) {}
+    };
+    // ifstream не открыт
+    class IFStreamNoOpen : public runtime_error {
+    public:
+        explicit IFStreamNoOpen()
+        : runtime_error("ifstream is_open() == false") {}
+    };
 
     /**
      *  \~Russian
@@ -110,13 +143,6 @@ namespace InitFiles {
     
     /**
      *  \~Russian
-     *      @brief Проверка на валидность пути для безопасного открытия файла
-     *      @details Ошибки вносяться во внутренние переменные. Ознакомьтесь с error_* функциями и переменными.
-     */
-    bool file_opened(std::filesystem::path path, bool need_file_exists);
-    
-    /**
-     *  \~Russian
      *      @brief Чтение и получение определенной строки с std::ifstream
      *      @param[in] file Открытый файл
      *      @param[in] line Строка, которую нужно прочитать (начинатся с 0)
@@ -131,6 +157,8 @@ namespace InitFiles {
      *      @param[in] end На какой строке закончить
      */
     std::string file_get_text_for(std::ifstream file, int start, int end);
+
+    std::vector<std::string> file_get_text_lines(std::istream& file);
 
     /**
      *  \~Russian

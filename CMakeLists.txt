@@ -19,13 +19,15 @@ message(STATUS "InitTools: CMake CXX Standart ${CMAKE_CXX_STANDARD}")
 #endif()
 
 # Порядок модулей:
-# 1. InitPlatform
-# 2. InitFiles
-# 3. InitConsole
-# 4. InitWindow
+# 1. InitLocale
+# 2. InitPlatform
+# 3. InitFiles
+# 4. InitConsole
+# 5. InitWindow
 
 message(STATUS "InitTools: Build Type - ${CMAKE_BUILD_TYPE}")
 
+option(INITTOOLS_ENABLE_INITLOCALE "Enable Module InitLocale" ON)
 option(INITTOOLS_ENABLE_INITPLATFORM "Enable Module InitPlatform" ON)
 option(INITTOOLS_ENABLE_INITCONSOLE "Enable Module InitConsole" ON)
 option(INITTOOLS_ENABLE_INITFILES "Enable Module InitFiles" ON)
@@ -33,11 +35,27 @@ option(INITTOOLS_ENABLE_INITWINDOW "Enable Module InitWindow" ON)
 
 include(FetchContent)
 
+# MoParser (https://github.com/laurent22/simple-gettext)
+file(GLOB_RECURSE MOPARSER_SOURCES CONFIGURE_DEPENDS
+    src/MoParser/*.cpp
+)
+
 message(STATUS "InitTools: INITTOOLS -> INITTOOLS")
 # INIT_TOOLS -> INIT_TOOLS:
     file(GLOB_RECURSE INITTOOLS_SOURCES CONFIGURE_DEPENDS
         src/InitTools/InitTools/*.cpp
     )
+
+if(INITTOOLS_ENABLE_INITLOCALE)
+message(STATUS "InitTools: INITTOOLS -> INITLOCALE")
+# INIT_TOOLS -> INIT_LOCALE:
+
+    file(GLOB_RECURSE INITLOCALE_SOURCES CONFIGURE_DEPENDS
+        src/InitTools/InitLocale/*.cpp
+    )
+else()
+message(STATUS "InitTools: INITTOOLS_ENABLE_INITLOCALE disabled")
+endif()
 
 if(INITTOOLS_ENABLE_INITPLATFORM)
 message(STATUS "InitTools: INITTOOLS -> INITPLATFORM")
@@ -134,24 +152,30 @@ endif()
 
 # add_library
 set(INITTOOLS_ADD_LIBRARY
+    ${INITLOCALE_SOURCES}
     ${INITPLATFORM_SOURCES}
+    ${INITFILES_SOURCES}
     ${INITCONSOLE_SOURCES}
     ${INITWINDOW_SOURCES}
 )
+if(INITTOOLS_ENABLE_INITLOCALE) # InitLocale
+    list(APPEND INITTOOLS_ADD_LIBRARY ${INITLOCALESOURCES})
+endif()
 if(INITTOOLS_ENABLE_INITPLATFORM) # InitPlatform
     list(APPEND INITTOOLS_ADD_LIBRARY ${INITPLATFORM_SOURCES})
 endif()
-if(INITTOOLS_ENABLE_INITCONSOLE) # InitConsole
-    list(APPEND INITTOOLS_ADD_LIBRARY ${INITCONSOLE_SOURCES})
-endif()
 if(INITTOOLS_ENABLE_INITFILES) # InitFiles
     list(APPEND INITTOOLS_ADD_LIBRARY ${INITFILES_SOURCES})
+endif()
+if(INITTOOLS_ENABLE_INITCONSOLE) # InitConsole
+    list(APPEND INITTOOLS_ADD_LIBRARY ${INITCONSOLE_SOURCES})
 endif()
 if(INITTOOLS_ENABLE_INITWINDOW) # InitWindow
     list(APPEND INITTOOLS_ADD_LIBRARY ${INITWINDOW_SOURCES})
 endif()
 
 add_library(InitTools STATIC
+    ${MOPARSER_SOURCES}
     ${INITTOOLS_SOURCES}
     ${INITTOOLS_ADD_LIBRARY}
 )
@@ -159,14 +183,17 @@ target_compile_features(InitTools PUBLIC cxx_std_20)
 
 # target_link_libraries
 set(INITTOOLS_TARGET_LINK_LIBRARIES)
+if(INITTOOLS_ENABLE_INITLOCALE) # InitLocale
+
+endif()
 if(INITTOOLS_ENABLE_INITPLATFORM) # InitPlatform
+
+endif()
+if(INITTOOLS_ENABLE_INITFILES) # InitFiles
 
 endif()
 if(INITTOOLS_ENABLE_INITCONSOLE) # InitConsole
     list(APPEND INITTOOLS_TARGET_LINK_LIBRARIES spdlog)
-endif()
-if(INITTOOLS_ENABLE_INITFILES) # InitFiles
-
 endif()
 if(INITTOOLS_ENABLE_INITWINDOW) # InitWindow
     list(APPEND INITTOOLS_TARGET_LINK_LIBRARIES glfw glad glm)
@@ -177,14 +204,17 @@ target_link_libraries(InitTools PRIVATE
 
 # target_include_directories
 set(INITTOOLS_TARGET_INCLUDE_DIRECTORIES)
+if(INITTOOLS_ENABLE_INITLOCALE) # InitLocale
+
+endif()
 if(INITTOOLS_ENABLE_INITPLATFORM) # InitPlatform
+
+endif()
+if(INITTOOLS_ENABLE_INITFILES) # InitFiles
 
 endif()
 if(INITTOOLS_ENABLE_INITCONSOLE) # InitConsole
     list(APPEND INITTOOLS_TARGET_INCLUDE_DIRECTORIES ${spdlog_SOURCE_DIR}/include)
-endif()
-if(INITTOOLS_ENABLE_INITFILES) # InitFiles
-
 endif()
 if(INITTOOLS_ENABLE_INITWINDOW) # InitWindow
     list(APPEND INITTOOLS_TARGET_INCLUDE_DIRECTORIES ${glfw_SOURCE_DIR}/include ${glad_SOURCE_DIR}/include ${glm_SOURCE_DIR})
@@ -198,3 +228,18 @@ target_include_directories(InitTools
 )
 
 add_library(InitTools::InitTools ALIAS InitTools)
+
+# Тестирование
+# Включаем тестирование
+enable_testing()
+
+file(GLOB INITTOOLS_TEST_SOURCES CONFIGURE_DEPENDS tests/*.cpp)
+
+foreach(test_file IN LISTS INITTOOLS_TEST_SOURCES)
+    get_filename_component(test_name ${test_file} NAME_WE)
+
+    add_executable(${test_name} ${test_file})
+    target_link_libraries(${test_name} PRIVATE InitTools)
+
+    add_test(NAME ${test_name} COMMAND ${test_name})
+endforeach()
