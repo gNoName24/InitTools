@@ -9,7 +9,7 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: ru\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #: InitWindow.cpp:20
 msgid "init_GLFW"
-msgstr "Инициализация GLFW"
+msgstr "GLFW initialization"
 
 #: InitWindow.cpp:22
 msgid "init_GLFW.error.\"glfwInit() != GLFW_TRUE\""
@@ -25,55 +25,55 @@ msgstr "GLFW initialization error: glfwInit() != GLFW_TRUE"
 
 #: InitWindow.cpp:32
 msgid "init_GLAD"
-msgstr "Инициализация GLAD"
+msgstr "GLAD initialization"
 
 #: InitWindow.cpp:34
 msgid ""
 "init_GLAD.error.\"!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)\""
 msgstr ""
-"Ошибка инициализации GLAD: !gladLoadGLLoader((GLADloadproc) "
+"GLFW initialization error: !gladLoadGLLoader((GLADloadproc) "
 "glfwGetProcAddress)"
 
 #: InitWindow.cpp:44
 msgid "new_window.created"
-msgstr "Окно \"{}\" создано"
+msgstr "The window “{}” has been created"
 
 # Начальный префикс ко всем последующим логам в InitWindow_WindowClass
 msgid "InitWindow_WindowClass.prefix"
-msgstr "[окно {}]"
+msgstr "[win {}]"
 
 #: InitWindowClass.cpp:17
 msgid "InitWindow_WindowClass::init_window"
-msgstr "Инициализация окна"
+msgstr "Window initialization"
 
 #: InitWindowClass.cpp:24
 msgid "InitWindow_WindowClass::init_window.error.\"window == nullptr\""
-msgstr "Ошибка инициализации окна: window == nullptr"
+msgstr "Window initialization error: window == nullptr"
 
 #: InitWindowClass.cpp:37
 msgid "InitWindow_WindowClass::init_window.set_parameters"
-msgstr "Установка параметров"
+msgstr "Setting parameters"
 
 #: InitWindowClass.cpp:48
 msgid "InitWindow_WindowClass::init_window.wayland_in_linux"
-msgstr "Событие GLFW WindowPosCallback не поддерживается Wayland"
+msgstr "GLFW WindowPosCallback event are not supported by Wayland"
 
 #: InitWindowClass.cpp:66
 msgid "InitWindow_WindowClass::while_start"
-msgstr "Запуск цикла (while)"
+msgstr "Starting a while"
 
 #: InitWindowClassThread.cpp:17
 msgid "InitWindow_WindowClass::render_thread_start"
-msgstr "Запуск потока рендера"
+msgstr "Starting the render thread"
 
 #: InitWindowClassThread.cpp:24
 msgid ""
 "InitWindow_WindowClass::render_thread_start.error.\"!"
 "gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)\""
 msgstr ""
-"Ошибка запуска потока рендера: !gladLoadGLLoader((GLADloadproc) "
+"Starting the render thread error: !gladLoadGLLoader((GLADloadproc) "
 "glfwGetProcAddress)"
 
 #: InitWindowClassThread.cpp:48
 msgid "InitWindow_WindowClass::render_thread_stop"
-msgstr "Остановка потока рендера"
+msgstr "Stopping the render thread"

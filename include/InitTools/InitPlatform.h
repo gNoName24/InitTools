@@ -144,7 +144,7 @@ namespace InitPlatform {
          *  @{
          */
         
-                
+        std::string get_XDG_session_type();
 
         /// @}
     };

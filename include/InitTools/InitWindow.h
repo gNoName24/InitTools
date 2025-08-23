@@ -32,6 +32,7 @@
     // Модульные зависимости
     #include <InitTools/InitTools.h>
     // #include <InitTools/InitConsole.h> <- В InitWindow.cpp
+    // #include <InitTools/InitPlatform.h> <- В InitWindowClass.cpp
 
 /////////////////////////////////////////////////////////////
 

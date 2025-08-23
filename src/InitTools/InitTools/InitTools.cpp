@@ -29,7 +29,7 @@ namespace InitTools {
         locale_module_manager.InitWindow = LocaleStorageModules(
             "InitWindow",
             locale_MOs[global_locale_primary]["InitWindow"],
-            locale_MOs[global_locale_primary]["InitWindow"]
+            locale_MOs[global_locale_fallback]["InitWindow"]
         );
     }
 

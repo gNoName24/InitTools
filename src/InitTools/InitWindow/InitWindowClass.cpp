@@ -9,6 +9,7 @@
 
 // Модульные зависимости
 #include <InitTools/InitConsole.h>
+#include <InitTools/InitPlatform.h>
 
 // InitWindow
 namespace InitWindow {
@@ -39,7 +40,15 @@ namespace InitWindow {
         );
         glfwSetWindowUserPointer(window, this);
         glfwSetFramebufferSizeCallback(window, InitWindow::framebuffer_size_callback);
-        glfwSetWindowPosCallback(window, InitWindow::window_pos_callback);
+        // Wayland на Linux не поддерживает это событие
+        if(InitPlatform::get_OS() != "Linux" && InitPlatform::Linux::get_XDG_session_type() != "Wayland") {
+            glfwSetWindowPosCallback(window, InitWindow::window_pos_callback);
+        } else {
+            log_debug(fmt::runtime(
+                _("InitWindow_WindowClass.prefix") + " " + _("InitWindow_WindowClass::init_window.wayland_in_linux")),
+                self_id
+            );
+        }
         glfwSetCursorPosCallback(window, InitWindow::cursor_position_callback);
 
         glfwMakeContextCurrent(nullptr);

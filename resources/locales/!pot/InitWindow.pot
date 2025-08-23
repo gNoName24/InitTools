@@ -1,7 +1,7 @@
 # .pot by NoName24 (gNoName24)
 # InitWindow module
 # Created on 2025-08-23
-# Last Updated on 2025-08-23
+# Last Updated on 2025-08-24
 
 msgid ""
 msgstr ""
@@ -47,7 +47,11 @@ msgstr ""
 msgid "InitWindow_WindowClass::init_window.set_parameters"
 msgstr ""
 
-#: InitWindowClass.cpp:57
+#: InitWindowClass.cpp:48
+msgid "InitWindow_WindowClass::init_window.wayland_in_linux"
+msgstr ""
+
+#: InitWindowClass.cpp:66
 msgid "InitWindow_WindowClass::while_start"
 msgstr ""
 
