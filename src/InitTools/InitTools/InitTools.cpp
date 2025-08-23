@@ -26,6 +26,11 @@ namespace InitTools {
             locale_MOs[global_locale_primary]["InitTools"],
             locale_MOs[global_locale_fallback]["InitTools"]
         );
+        locale_module_manager.InitWindow = LocaleStorageModules(
+            "InitWindow",
+            locale_MOs[global_locale_primary]["InitWindow"],
+            locale_MOs[global_locale_primary]["InitWindow"]
+        );
     }
 
     void locale_module_init(LocaleStorageModules& locale_module_manager) {
@@ -40,22 +45,23 @@ namespace InitTools {
         locallm.init();
     }
 
+    bool starter_hide_info = false;
     bool starter_hide_info_after_first_run = true;
     bool starter_first_run = false;
     void starter() {
         locale_mos_init(locale_managers);
         locale_module_init(locale_managers.InitTools);
+        locale_module_init(locale_managers.InitWindow);
         InitLocale::LocaleManager& locallm = locale_managers.InitTools.locale_manager;
 
+        if(starter_hide_info) return;
         if(starter_hide_info_after_first_run == true) {
-            if(starter_first_run == true) {
-                return;
-            }
+            if(starter_first_run == true) return;
         }
         log_info("InitTools v{}.{}.{}", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
-        log_info("InitTools: {} - {}", locallm._("primary_locale"), global_locale_primary);
-        log_info("InitTools: {} - {}", locallm._("fallback_locale"), global_locale_fallback);
-        log_info("InitTools: {} - {}", locallm._("current_directory"), InitFiles::get_current_directory().string());
+        log_info("InitTools: {} - {}", locallm.gettext("primary_locale"), global_locale_primary);
+        log_info("InitTools: {} - {}", locallm.gettext("fallback_locale"), global_locale_fallback);
+        log_info("InitTools: {} - {}", locallm.gettext("current_directory"), InitFiles::get_current_directory().string());
         starter_first_run = true;
     }
 };

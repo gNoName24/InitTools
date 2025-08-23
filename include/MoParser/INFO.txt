@@ -1,0 +1,2 @@
+Взято из github - https://github.com/laurent22/simple-gettext
+Спасибо laurent22

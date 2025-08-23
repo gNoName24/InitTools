@@ -34,4 +34,24 @@ namespace InitLocale {
             fallback_parser->parse(buf);
         }
     }
+
+    const char* LocaleManager::gettext(const char* key) const {
+        if(only_key) {
+            return key;
+        }
+
+        GettextMessage* msg = nullptr;
+
+        if(fallback_parser && fallback_parser->ready()) {
+            msg = fallback_parser->getTranslation(key, static_cast<int>(strlen(key)));
+        }
+
+        // Если не найдено в второстепенной локали, то берется из основной
+
+        if(!msg && primary_parser && primary_parser->ready()) {
+            msg = primary_parser->getTranslation(key, static_cast<int>(strlen(key)));
+        }
+
+        return msg ? msg->string : key;
+    }
 };

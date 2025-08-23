@@ -20,8 +20,8 @@
 
 // InitTools:
     // C++ Зависимости
-    #include <unordered_map>
-    #include <string_view>
+    // #include <unordered_map> <- Уже есть в InitLocale.h
+    // #include <string> <- Уже есть в InitLocale.h
 
     // Библиотечные зависимости
     // #
@@ -99,7 +99,19 @@ namespace InitTools {
     // [Локаль][Модуль][.mo]
     extern std::unordered_map<std::string,std::unordered_map<std::string, const std::vector<unsigned char>>> locale_MOs;
 
+    /**
+     *  \~Russian
+     *      @brief Основная локаль библиотеки InitTools
+     *      @details Ключ берется отсюда, если этот же ключ не найден в второстепенной локали.\n
+     *          Доступные локали: ru, en.
+     */
     extern std::string global_locale_primary; // Основная локаль, распространенная на все модули
+    /**
+     *  \~Russian
+     *      @brief Второстепенная локаль библиотеки InitTools
+     *      @details Сначала ключ берется отсюда, а если не найден, ищется в основной локали.\n
+     *          Доступные локали: ru, en.
+     */
     extern std::string global_locale_fallback; // Второстепенная локаль, распространенная на все модули
 
     // Список всех LocaleStorageModules каждого модуля
@@ -113,7 +125,8 @@ namespace InitTools {
 
     void locale_module_init(LocaleManagers& locale_module_manager);
 
-    extern bool starter_hide_info_after_first_run; // Спрятать log_info после первого запуска
+    extern bool starter_hide_info;
+    extern bool starter_hide_info_after_first_run; // true - спрятать log_info после первого запуска
     extern bool starter_first_run;
 
     /**

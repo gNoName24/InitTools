@@ -15,7 +15,7 @@ namespace InitConsole {
     // Logger
     namespace Logger {
         std::shared_ptr<spdlog::logger> logger = nullptr;
-        int source_loc_width = 32;
+        int source_loc_width = 48;
         const char* logger_name = "console";
         const char* pattern = "[%^%S%$] [%T] [%L] %v";
 
@@ -29,6 +29,12 @@ namespace InitConsole {
             formatter->set_pattern(pattern);
 
             logger->set_formatter(std::move(formatter));
+
+            #ifdef NDEBUG
+                logger->set_level(spdlog::level::info);
+            #else
+                logger->set_level(spdlog::level::trace);
+            #endif
         }
 
         bool initialized() {

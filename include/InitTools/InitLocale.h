@@ -65,23 +65,10 @@ namespace InitLocale {
         std::vector<unsigned char> replacer_primary;
         std::vector<unsigned char> replacer_fallback;
 
+        bool only_key = false; // Выводить только ключи
+
         void init();
-
-        const char* _(const char* key) const {
-            GettextMessage* msg = nullptr;
-
-            if(fallback_parser && fallback_parser->ready()) {
-                msg = fallback_parser->getTranslation(key, static_cast<int>(strlen(key)));
-            }
-
-            // Если не найдено в второстепенной локали, то берется из основной
-
-            if(!msg && primary_parser && primary_parser->ready()) {
-                msg = primary_parser->getTranslation(key, static_cast<int>(strlen(key)));
-            }
-
-            return msg ? msg->string : key;
-        }
+        const char* gettext(const char* key) const;
 
     private:
         std::vector<char> buffer_primary;

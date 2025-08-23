@@ -1,8 +1,14 @@
 #include <InitTools/InitWindow.h>
 
+// C++ Зависимости
+// #
+
+// Библиотечные зависимости
+// #
+
 // Модульные зависимости
 
-
+// InitWindow
 namespace InitWindow {
     void InitWindow_WindowClass::callback_FramebufferSize(GLFWwindow* window, int width, int height) {
         window_size = glm::ivec2(width, height);

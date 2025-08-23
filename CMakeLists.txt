@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.24)
 project(InitTools VERSION 2.0.0 LANGUAGES CXX)
 
+# add_compile_options(-save-temps=obj -dumpdir ${CMAKE_BINARY_DIR}/clang_temps/)
+
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -save-temps -O2")
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions -fno-rtti")
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Oz")
@@ -198,7 +200,7 @@ endif()
 if(INITTOOLS_ENABLE_INITWINDOW) # InitWindow
     list(APPEND INITTOOLS_TARGET_LINK_LIBRARIES glfw glad glm)
 endif()
-target_link_libraries(InitTools PRIVATE
+target_link_libraries(InitTools PUBLIC
     ${INITTOOLS_TARGET_LINK_LIBRARIES}
 )
 
@@ -220,8 +222,8 @@ if(INITTOOLS_ENABLE_INITWINDOW) # InitWindow
     list(APPEND INITTOOLS_TARGET_INCLUDE_DIRECTORIES ${glfw_SOURCE_DIR}/include ${glad_SOURCE_DIR}/include ${glm_SOURCE_DIR})
 endif()
 target_include_directories(InitTools
-    PRIVATE
-    ${INITTOOLS_TARGET_INCLUDE_DIRECTORIES}
+    PUBLIC
+        ${INITTOOLS_TARGET_INCLUDE_DIRECTORIES}
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
@@ -230,7 +232,6 @@ target_include_directories(InitTools
 add_library(InitTools::InitTools ALIAS InitTools)
 
 # Тестирование
-# Включаем тестирование
 enable_testing()
 
 file(GLOB INITTOOLS_TEST_SOURCES CONFIGURE_DEPENDS tests/*.cpp)
@@ -242,4 +243,7 @@ foreach(test_file IN LISTS INITTOOLS_TEST_SOURCES)
     target_link_libraries(${test_name} PRIVATE InitTools)
 
     add_test(NAME ${test_name} COMMAND ${test_name})
+
+    # target_compile_options(${test_name} PRIVATE -Os -ffunction-sections -fdata-sections -flto)
+    # target_link_options(${test_name} PRIVATE -Wl,--gc-sections -s -flto)
 endforeach()

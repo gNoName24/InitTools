@@ -1,19 +1,42 @@
 #include "InitTools/InitTools.h"
 #include <InitTools/InitWindow.h>
 
+// C++ Зависимости
+// #
+
+// Библиотечные зависимости
+// #
+
 // Модульные зависимости
 #include <InitTools/InitConsole.h>
 
+// InitWindow
 namespace InitWindow {
     void InitWindow_WindowClass::init_window() {
-        //log_info(InitTools::Localization::gets("InitWindow", "InitWindow_WindowClass::initWindow_start"));
-        window = glfwCreateWindow(window_size.x, window_size.y, "Window", nullptr, nullptr);
+        log_debug(fmt::runtime(
+            _("InitWindow_WindowClass.prefix") + " " + _("InitWindow_WindowClass::init_window")),
+            self_id
+        );
+        window = glfwCreateWindow(window_size.x, window_size.y, self_id.c_str(), nullptr, nullptr);
         if(window == nullptr) {
             glfwTerminate();
-            //log_error(InitTools::Localization::gets("InitWindow", "InitWindow_WindowClass::initWindow_window_nullptr"));
+            log_error(fmt::runtime(
+                _("InitWindow_WindowClass.prefix") + " " + _("InitWindow_WindowClass::init_window.error.\"window == nullptr\"")),
+                self_id
+            );
+            throw std::runtime_error(fmt::format(
+                fmt::runtime(
+                    _("InitWindow_WindowClass.prefix") + " " + _("InitWindow_WindowClass::init_window.error.\"window == nullptr\"")),
+                    self_id
+                )
+            );
         }
         glfwMakeContextCurrent(window);
 
+        log_debug(fmt::runtime(
+            _("InitWindow_WindowClass.prefix") + " " + _("InitWindow_WindowClass::init_window.set_parameters")),
+            self_id
+        );
         glfwSetWindowUserPointer(window, this);
         glfwSetFramebufferSizeCallback(window, InitWindow::framebuffer_size_callback);
         glfwSetWindowPosCallback(window, InitWindow::window_pos_callback);
@@ -30,6 +53,10 @@ namespace InitWindow {
     }
 
     void InitWindow_WindowClass::while_start() {
+        log_debug(fmt::runtime(
+            _("InitWindow_WindowClass.prefix") + " " + _("InitWindow_WindowClass::while_start")),
+            self_id
+        );
         while(!glfwWindowShouldClose(window)) {
             while_glfwEvents();
         }

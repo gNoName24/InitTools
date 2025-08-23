@@ -30,10 +30,15 @@
     #include <glm/glm.hpp>
 
     // Модульные зависимости
-    // #include <InitTools/InitTools.h> <- В InitWindow.cpp
+    #include <InitTools/InitTools.h>
     // #include <InitTools/InitConsole.h> <- В InitWindow.cpp
 
 /////////////////////////////////////////////////////////////
+
+// InitTools LocaleManagers ~ InitWindow
+inline auto _ = [](const char* key) -> std::string {
+    return InitTools::locale_managers.InitWindow.locale_manager.gettext(key);
+};
 
 /** @ingroup InitWindow
  *  \~Russian
@@ -195,14 +200,14 @@ namespace InitWindow {
      *  \~English
      *      @brief OpenGL version (Major)
      */
-    extern int opengl_version_major;
+    extern const int opengl_version_major;
     /**
      *  \~Russian
      *      @brief Версия OpenGL (Минор)
      *  \~English
      *      @brief OpenGL version (Minor)
      */
-    extern int opengl_version_minor;
+    extern const int opengl_version_minor;
 
     /**
      *  \~Russian
