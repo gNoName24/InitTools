@@ -18,7 +18,15 @@ namespace InitTools {
 
     LocaleManagers locale_managers;
     std::string global_locale_primary = "ru";
-    std::string global_locale_fallback = "en";
+    std::string global_locale_fallback = "ru";
+
+    void locale_mos_init(LocaleManagers& locale_module_manager) {
+        locale_module_manager.InitTools = LocaleStorageModules(
+            "InitTools",
+            locale_MOs[global_locale_primary]["InitTools"],
+            locale_MOs[global_locale_fallback]["InitTools"]
+        );
+    }
 
     void locale_module_init(LocaleStorageModules& locale_module_manager) {
         InitLocale::LocaleManager& locallm = locale_module_manager.locale_manager; // Locale Manager
@@ -32,13 +40,22 @@ namespace InitTools {
         locallm.init();
     }
 
+    bool starter_hide_info_after_first_run = true;
+    bool starter_first_run = false;
     void starter() {
+        locale_mos_init(locale_managers);
         locale_module_init(locale_managers.InitTools);
         InitLocale::LocaleManager& locallm = locale_managers.InitTools.locale_manager;
 
+        if(starter_hide_info_after_first_run == true) {
+            if(starter_first_run == true) {
+                return;
+            }
+        }
         log_info("InitTools v{}.{}.{}", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
         log_info("InitTools: {} - {}", locallm._("primary_locale"), global_locale_primary);
         log_info("InitTools: {} - {}", locallm._("fallback_locale"), global_locale_fallback);
         log_info("InitTools: {} - {}", locallm._("current_directory"), InitFiles::get_current_directory().string());
+        starter_first_run = true;
     }
 };

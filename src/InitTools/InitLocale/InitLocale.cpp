@@ -12,7 +12,7 @@
 
 // InitLocale
 namespace InitLocale {
-    /*std::string get_locale_current_system() {
+    std::string get_locale_current_system() {
         return setlocale(LC_ALL, nullptr);
-    }*/
+    }
 };

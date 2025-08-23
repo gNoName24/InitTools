@@ -91,30 +91,30 @@ namespace InitTools {
             const std::vector<unsigned char>& replacer_fallback_ = {0x00}
         ) {
             domain = domain_;
-            if(replacer_primary_[0] != 0x00) {
-                replacer_primary = replacer_primary_;
-            }
-            if(replacer_fallback_[0] != 0x00) {
-                replacer_fallback = replacer_fallback_;
-            }
+            replacer_primary = replacer_primary_;
+            replacer_fallback = replacer_fallback_;
         }
     };
+    // Все .mo, конвертированные в массив байтов
+    // [Локаль][Модуль][.mo]
+    extern std::unordered_map<std::string,std::unordered_map<std::string, const std::vector<unsigned char>>> locale_MOs;
+
+    extern std::string global_locale_primary; // Основная локаль, распространенная на все модули
+    extern std::string global_locale_fallback; // Второстепенная локаль, распространенная на все модули
+
     // Список всех LocaleStorageModules каждого модуля
     struct LocaleManagers {
-        LocaleStorageModules InitTools{
-            "InitTools",
-            //{}, // Будут добавлены к следующему коммиту вместе с .pot в resources/locales/.pot
-            //{}
-        };
+        LocaleStorageModules InitTools{"InitTools"};
         LocaleStorageModules InitWindow{"InitWindow"};
     };
 
     // Каждый модуль может обратиться к этой переменной
     extern LocaleManagers locale_managers;
-    extern std::string global_locale_primary;
-    extern std::string global_locale_fallback;
 
     void locale_module_init(LocaleManagers& locale_module_manager);
+
+    extern bool starter_hide_info_after_first_run; // Спрятать log_info после первого запуска
+    extern bool starter_first_run;
 
     /**
      *  \~Russian

@@ -1,0 +1,26 @@
+# .pot by NoName24 (gNoName24)
+# InitTools (Core) module
+msgid ""
+msgstr ""
+"Project-Id-Version: InitTools 2.0.0\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#: InitTools.cpp:42
+msgid "current_directory"
+msgstr "Текущая директория"
+
+#: InitTools.cpp:40
+msgid "primary_locale"
+msgstr "Основная локаль"
+
+#: InitTools.cpp:41
+msgid "fallback_locale"
+msgstr "Второстепенная локаль"
