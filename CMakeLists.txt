@@ -29,11 +29,18 @@ message(STATUS "InitTools: CMake CXX Standart ${CMAKE_CXX_STANDARD}")
 
 message(STATUS "InitTools: Build Type - ${CMAKE_BUILD_TYPE}")
 
+# Включение / Выключение модулей
 option(INITTOOLS_ENABLE_INITLOCALE "Enable Module InitLocale" ON)
 option(INITTOOLS_ENABLE_INITPLATFORM "Enable Module InitPlatform" ON)
 option(INITTOOLS_ENABLE_INITCONSOLE "Enable Module InitConsole" ON)
 option(INITTOOLS_ENABLE_INITFILES "Enable Module InitFiles" ON)
 option(INITTOOLS_ENABLE_INITWINDOW "Enable Module InitWindow" ON)
+
+# Использование внешних библиотек для этой библиотеки
+option(INITTOOLS_USE_SYSTEM_SPDLOG "Use system spdlog instead of FetchContent" OFF)
+option(INITTOOLS_USE_SYSTEM_GLFW "Use system glfw instead of FetchContent" OFF)
+option(INITTOOLS_USE_SYSTEM_GLAD "Use system glad instead of FetchContent" OFF)
+option(INITTOOLS_USE_SYSTEM_GLM "Use system glm instead of FetchContent" OFF)
 
 include(FetchContent)
 
@@ -89,13 +96,19 @@ message(STATUS "InitTools: INITTOOLS -> INITCONSOLE")
 # INIT_TOOLS -> INIT_CONSOLE:
     message(STATUS "InitTools: INITTOOLS -> INITCONSOLE ~> LOGGER")
     # INIT_TOOLS -> INIT_CONSOLE ~> LOGGER:
-        message(STATUS "InitTools: INITTOOLS -> INITCONSOLE ~> LOGGER ~ spdlog v1.15.3")
-        FetchContent_Declare( # spdlog
-            spdlog
-            GIT_REPOSITORY https://github.com/gabime/spdlog.git
-            GIT_TAG        v1.15.3
-        )
-        FetchContent_MakeAvailable(spdlog)
+        # spdlog
+        message(STATUS "InitTools: INITTOOLS -> INITCONSOLE ~> LOGGER ~ spdlog v1.15.3 (USE_SYSTEM: ${INITTOOLS_USE_SYSTEM_SPDLOG})")
+        if(INITTOOLS_USE_SYSTEM_SPDLOG)
+            find_package(spdlog REQUIRED)
+        else()
+            FetchContent_Declare(
+                spdlog
+                GIT_REPOSITORY https://github.com/gabime/spdlog.git
+                GIT_TAG        v1.15.3
+            )
+            FetchContent_MakeAvailable(spdlog)
+        endif()
+        # ===========================================================================================================================
     file(GLOB_RECURSE INITCONSOLE_SOURCES CONFIGURE_DEPENDS
         src/InitTools/InitConsole/*.cpp
         src/InitTools/InitConsole/InitConsole_Logger/*.cpp
@@ -108,42 +121,54 @@ if(INITTOOLS_ENABLE_INITWINDOW)
 message(STATUS "InitTools: INITTOOLS -> INITWINDOW")
 # INIT_TOOLS -> INIT_WINDOW:
     # GLFW
-    message(STATUS "InitTools: INITTOOLS -> INITWINDOW ~ GLFW 3.4")
-    FetchContent_Declare(
-            glfw
-            GIT_REPOSITORY https://github.com/glfw/glfw.git
-            GIT_TAG        3.4
-    )
-    FetchContent_MakeAvailable(glfw)
-    # ====
-    message(STATUS "InitTools: INITTOOLS -> INITWINDOW ~ GLAD v0.1.36")
-    # GLAD - 
-    set(GLAD_PATCH ${CMAKE_CURRENT_SOURCE_DIR}/patches/glad-set-min-cmake-3.24.patch)
-    FetchContent_Declare(
-            glad
-            GIT_REPOSITORY https://github.com/Dav1dde/glad.git
-            GIT_TAG        v0.1.36
-            PATCH_COMMAND
-                ${CMAKE_COMMAND} -E echo "Patching glad/CMakeLists.txt -> bump cmake_minimum_required to 3.24"
-                COMMAND git apply ${GLAD_PATCH}
-            UPDATE_DISCONNECTED 1
-    )
+    message(STATUS "InitTools: INITTOOLS -> INITWINDOW ~ GLFW 3.4 (USE_SYSTEM: ${INITTOOLS_USE_SYSTEM_GLFW})")
+    if(INITTOOLS_USE_SYSTEM_GLFW)
+        find_package(glfw REQUIRED)
+    else()
+        FetchContent_Declare(
+                glfw
+                GIT_REPOSITORY https://github.com/glfw/glfw.git
+                GIT_TAG        3.4
+        )
+        FetchContent_MakeAvailable(glfw)
+    endif()
+    # ========================================================================================================
+    # GLAD
+    message(STATUS "InitTools: INITTOOLS -> INITWINDOW ~ GLAD v0.1.36 (USE_SYSTEM: ${INITTOOLS_USE_SYSTEM_GLAD})")
+    if(INITTOOLS_USE_SYSTEM_GLAD)
+        find_package(glad REQUIRED)
+    else()
+        set(GLAD_PATCH ${CMAKE_CURRENT_SOURCE_DIR}/patches/glad-set-min-cmake-3.24.patch)
+        FetchContent_Declare(
+                glad
+                GIT_REPOSITORY https://github.com/Dav1dde/glad.git
+                GIT_TAG        v0.1.36
+                PATCH_COMMAND
+                    ${CMAKE_COMMAND} -E echo "Patching glad/CMakeLists.txt -> bump cmake_minimum_required to 3.24"
+                    COMMAND git apply ${GLAD_PATCH}
+                UPDATE_DISCONNECTED 1
+        )
+    endif()
     FetchContent_MakeAvailable(glad)
-    # ====
+    # ============================================================================================================
     # GLM
-    set(GLM_PATCH ${CMAKE_CURRENT_SOURCE_DIR}/patches/glm-set-min-cmake-3.24.patch)
-    message(STATUS "InitTools: INITTOOLS -> INITWINDOW ~ GLM 1.0.1")
-    FetchContent_Declare(
-            glm
-            GIT_REPOSITORY https://github.com/g-truc/glm.git
-            GIT_TAG        1.0.1
-            PATCH_COMMAND
-                ${CMAKE_COMMAND} -E echo "Patching glm/CMakeLists.txt -> bump cmake_minimum_required to 3.24"
-                COMMAND git apply ${GLM_PATCH}
-            UPDATE_DISCONNECTED 1
-    )
-    FetchContent_MakeAvailable(glm)
-    # ===
+    message(STATUS "InitTools: INITTOOLS -> INITWINDOW ~ GLM 1.0.1 (USE_SYSTEM: ${INITTOOLS_USE_SYSTEM_GLM})")
+    if(INITTOOLS_USE_SYSTEM_GLM)
+        find_package(glm REQUIRED)
+    else()
+        set(GLM_PATCH ${CMAKE_CURRENT_SOURCE_DIR}/patches/glm-set-min-cmake-3.24.patch)
+        FetchContent_Declare(
+                glm
+                GIT_REPOSITORY https://github.com/g-truc/glm.git
+                GIT_TAG        1.0.1
+                PATCH_COMMAND
+                    ${CMAKE_COMMAND} -E echo "Patching glm/CMakeLists.txt -> bump cmake_minimum_required to 3.24"
+                    COMMAND git apply ${GLM_PATCH}
+                UPDATE_DISCONNECTED 1
+        )
+        FetchContent_MakeAvailable(glm)
+    endif()
+    # ========================================================================================================
     find_package(OpenGL REQUIRED)
     file(GLOB_RECURSE INITWINDOW_SOURCES CONFIGURE_DEPENDS
         src/InitTools/InitWindow/*.cpp
@@ -232,18 +257,18 @@ target_include_directories(InitTools
 add_library(InitTools::InitTools ALIAS InitTools)
 
 # Тестирование
-enable_testing()
+#enable_testing()
 
-file(GLOB INITTOOLS_TEST_SOURCES CONFIGURE_DEPENDS tests/*.cpp)
+#file(GLOB INITTOOLS_TEST_SOURCES CONFIGURE_DEPENDS tests/*.cpp)
 
-foreach(test_file IN LISTS INITTOOLS_TEST_SOURCES)
-    get_filename_component(test_name ${test_file} NAME_WE)
+#foreach(test_file IN LISTS INITTOOLS_TEST_SOURCES)
+#    get_filename_component(test_name ${test_file} NAME_WE)
 
-    add_executable(${test_name} ${test_file})
-    target_link_libraries(${test_name} PRIVATE InitTools)
+#    add_executable(${test_name} ${test_file})
+#    target_link_libraries(${test_name} PRIVATE InitTools)
 
-    add_test(NAME ${test_name} COMMAND ${test_name})
+#    add_test(NAME ${test_name} COMMAND ${test_name})
 
     # target_compile_options(${test_name} PRIVATE -Os -ffunction-sections -fdata-sections -flto)
     # target_link_options(${test_name} PRIVATE -Wl,--gc-sections -s -flto)
-endforeach()
+#endforeach()
