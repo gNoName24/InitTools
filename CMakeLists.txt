@@ -36,11 +36,21 @@ option(INITTOOLS_ENABLE_INITCONSOLE "Enable Module InitConsole" ON)
 option(INITTOOLS_ENABLE_INITFILES "Enable Module InitFiles" ON)
 option(INITTOOLS_ENABLE_INITWINDOW "Enable Module InitWindow" ON)
 
-# Использование внешних библиотек для этой библиотеки
+# =====
 option(INITTOOLS_USE_SYSTEM_SPDLOG "Use system spdlog instead of FetchContent" OFF)
+
 option(INITTOOLS_USE_SYSTEM_GLFW "Use system glfw instead of FetchContent" OFF)
 option(INITTOOLS_USE_SYSTEM_GLAD "Use system glad instead of FetchContent" OFF)
 option(INITTOOLS_USE_SYSTEM_GLM "Use system glm instead of FetchContent" OFF)
+# =====
+
+# =====
+option(INITTOOLS_LINK_SPDLOG "Link spdlog inside InitTools" ON)
+
+option(INITTOOLS_LINK_GLFW "Link glfw inside InitTools" ON)
+option(INITTOOLS_LINK_GLAD "Link glad inside InitTools" ON)
+option(INITTOOLS_LINK_GLM "Link glm inside InitTools" ON)
+# =====
 
 include(FetchContent)
 
@@ -226,10 +236,20 @@ if(INITTOOLS_ENABLE_INITFILES) # InitFiles
 
 endif()
 if(INITTOOLS_ENABLE_INITCONSOLE) # InitConsole
-    list(APPEND INITTOOLS_TARGET_LINK_LIBRARIES spdlog)
+    if(INITTOOLS_LINK_SPDLOG)
+        list(APPEND INITTOOLS_TARGET_LINK_LIBRARIES spdlog)
+    endif()
 endif()
 if(INITTOOLS_ENABLE_INITWINDOW) # InitWindow
-    list(APPEND INITTOOLS_TARGET_LINK_LIBRARIES glfw glad glm)
+    if(INITTOOLS_LINK_GLFW)
+        list(APPEND INITTOOLS_TARGET_LINK_LIBRARIES glfw)
+    endif()
+    if(INITTOOLS_LINK_GLAD)
+        list(APPEND INITTOOLS_TARGET_LINK_LIBRARIES glad)
+    endif()
+    if(INITTOOLS_LINK_GLM)
+        list(APPEND INITTOOLS_TARGET_LINK_LIBRARIES glm)
+    endif()
 endif()
 target_link_libraries(InitTools PUBLIC
     ${INITTOOLS_TARGET_LINK_LIBRARIES}
