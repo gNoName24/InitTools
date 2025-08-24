@@ -68,12 +68,18 @@ namespace InitWindow {
          *  \~Russian
          *      @brief Размер окна
          *      @details Обновляется в framebuffer_size_callback.
+         *  \~English
+         *      @brief Window size
+         *      @details Updates in framebuffer_size_callback.
          */
         glm::ivec2 window_size = glm::ivec2(800, 600);
         /**
          *  \~Russian
          *      @brief Позиция окна на экране
          *      @details Обновляется в window_pos_callback.
+         *  \~English
+         *      @brief Window position on the screen
+         *      @details Updates in window_pos_callback.
          */
         glm::ivec2 window_position = glm::ivec2(0, 0);
 
@@ -82,19 +88,48 @@ namespace InitWindow {
          *  \~Russian
          *      @brief Позиция курсора в окне
          *      @details Обновляется в cursor_position_callback.
+         *  \~English
+         *      @brief Cursor position in the window
+         *      @details Updates in cursor_position_callback.
          */
         glm::ivec2 mouse_position = glm::ivec2(0, 0);
 
         // Frame
         /**
          *  \~Russian
-         *      @brief Общее количество кадров в процессе отрисовки окна
+         *      @brief Общее количество кадров с начала потока отрисовки окна
+         *  \~English
+         *      @brief Total number of frames since the start of window rendering
          */
         long frame_count = 0;
 
+        /**
+         *  \~Russian
+         *      @brief Время в секундах
+         *      @details Получается от GLFW (glfwGetTime()).
+         *  \~English
+         *      @brief Time in seconds
+         *      @details Obtained from GLFW (glfwGetTime()).
+         */
         float time;
+        /**
+         *  \~Russian
+         *      @brief Дельта тайм
+         *      @details Получается с помощью текущий_time - time (в InitWindow_WindowClass::update()).
+         *  \~English
+         *      @brief Delta time
+         *      @details It is obtained using current_time - time (in InitWindow_WindowClass::update()).
+         */
         float delta_time;
 
+        /**
+         *  \~Russian
+         *      @brief ФПС (Frame Per Second)
+         *      @details Получается с помощью 1.f / delta_time (в InitWindow_WindowClass::update()).
+         *  \~English
+         *      @brief FPS (Frame Per Second)
+         *      @details It is obtained using 1.f / delta_time (in InitWindow_WindowClass::update()).
+         */
         float FPS;
 
         /**

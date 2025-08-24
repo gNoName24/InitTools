@@ -80,44 +80,34 @@ namespace InitFiles {
 
     /**
      *  \~Russian
-     *      @brief Получение ошибки в виде ссылки
-     *  @return true / false
-     */
-    bool& get_error();
-    /**
-     *  \~Russian
-     *      @brief Получение сообщения ошибки
-     *      @return Сообщение ошибки
-     *      @details Выявляет сообщение ошибки на основе error_function и error_code.
-     */
-    std::string get_error_message();
-    /**
-     *  \~Russian
-     *      @brief Очистка ошибки после его просмотра
-     */
-    void error_close();
-
-    /**
-     *  \~Russian
      *      @brief Получить std::filesystem::path из std::string
+     *  \~English
+     *      @brief Get std::filesystem::path from std::string
      */
     std::filesystem::path get_path_in_string(std::string path);
     /**
      *  \~Russian
      *      @brief Получить std::string из std::filesystem::file
+     *  \~English
+     *      @brief Get std::string from std::filesystem::file
      */
     std::string get_string_in_path(std::filesystem::path path);
     
     /**
      *  \~Russian
      *      @brief Получить путь текущей директории
-     *      @return Путь откуда запустился исполняемый файл
+     *      @return Путь, откуда запустился исполняемый файл
+     *  \~English
+     *      @brief Get the path of the current directory
+     *      @details The path from which the executable file was launched
      */
     std::filesystem::path get_current_directory();
 
     /**
      *  \~Russian
      *      @brief Проверка на присутствие папки или файла по пути
+     *  \~English
+     *      @brief Checking for the exists of a folder or file along a path
      */
     bool path_exists(std::filesystem::path path);
     
@@ -125,12 +115,17 @@ namespace InitFiles {
     /**
      *  \~Russian
      *      @brief Проверка пути на папку
+     *  \~English
+     *      @brief Checking the path to the folder
      */
     bool is_directory(std::filesystem::path path);
     /**
      *  \~Russian
      *      @brief Создание папки
      *      @param[in] path Путь как новой папке
+     *  \~English
+     *      @brief Creating a folder
+     *      @param[in] path Path as a new folder
      */
     void directory_create(std::filesystem::path path);
     
@@ -138,6 +133,8 @@ namespace InitFiles {
     /**
      *  \~Russian
      *      @brief Проверка пути на файл
+     *  \~English
+     *      @brief Checking the path to the file
      */
     bool is_file(std::filesystem::path path);
     
@@ -146,6 +143,10 @@ namespace InitFiles {
      *      @brief Чтение и получение определенной строки с std::ifstream
      *      @param[in] file Открытый файл
      *      @param[in] line Строка, которую нужно прочитать (начинатся с 0)
+     *  \~English
+     *      @brief Reading and retrieving a specific string from std::ifstream
+     *      @param[in] file Opened file
+     *      @param[in] line The line to read (starting from 0)
      */
     std::string file_get_text_line(std::ifstream file, int line);
 
@@ -155,15 +156,31 @@ namespace InitFiles {
      *      @param[in] file Открытый файл
      *      @param[in] start С какой строчки начинать
      *      @param[in] end На какой строке закончить
+     *  \~English
+     *      @brief Reading and receiving the specified range of lines with std::ifstream
+     *      @param[in] file Opened file
+     *      @param[in] start Which line to start with
+     *      @param[in] end On which line to end
      */
     std::string file_get_text_for(std::ifstream file, int start, int end);
 
+    /**
+     *  \~Russian
+     *      @brief Чтение и получение всех строк в std::vector<std::string>
+     *      @param[in] file Открытый файл
+     *  \~English
+     *      @brief Reading and retrieving all strings in std::vector<std::string>
+     *      @param[in] file Opened file
+     */
     std::vector<std::string> file_get_text_lines(std::istream& file);
 
     /**
      *  \~Russian
      *      @brief Чтение и получение всего текста с std::fstream
      *      @param[in] file Открытый файл
+     *  \~English
+     *      @brief Reading and receiving the entire text with std::fstream
+     *      @param[in] file Opened file
      */
     std::string file_get_text_full(std::ifstream file);
 

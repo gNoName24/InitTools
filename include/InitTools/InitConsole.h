@@ -153,6 +153,7 @@ namespace InitConsole {
          *      @return Если logger == nullptr, то выдает false
          *  \~English
          *      @brief Is the logger initialized
+         *      @details If logger == nullptr, then returns false
          */ 
         bool initialized();
 
@@ -160,6 +161,9 @@ namespace InitConsole {
          *  \~Russian
          *      @brief Проверка на инициализацию
          *      @details Если логгер не инициализирован, то вызывается инициализация.
+         *  \~English
+         *      @brief Initialization check
+         *      @details If the logger is not initialized, initialization is called.
          */
         void init_check();
 

@@ -125,15 +125,33 @@ namespace InitTools {
 
     void locale_module_init(LocaleManagers& locale_module_manager);
 
+    /**
+     *  \~Russian
+     *      @brief Скрыть ли вывод info в функции starter()
+     *  \~English
+     *      @brief Hide info output in the starter() function
+     */
     extern bool starter_hide_info;
-    extern bool starter_hide_info_after_first_run; // true - спрятать log_info после первого запуска
+    /**
+     *  \~Russian
+     *      @brief Скрыть ли вывод info в функции starter() после первого вызова starter()
+     *  \~English
+     *      @brief Hide info output in starter() function after the first call to starter()
+     */
+    extern bool starter_hide_info_after_first_run;
+    /**
+     *  \~Russian
+     *      @brief Был ли первый вызов starter()
+     *  \~English
+     *      @brief Was the first call to starter()
+     */
     extern bool starter_first_run;
 
     /**
      *  \~Russian
-     *      @brief Стартовое сообщение
+     *      @brief Стартовая функция
      *  \~English
-     *      @brief Starter message
+     *      @brief Starter function
      */
     void starter();
 

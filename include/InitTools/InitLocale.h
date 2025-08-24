@@ -50,24 +50,84 @@ namespace InitLocale {
      *  \~Russian
      *      @brief Получение текущую системную локаль
      *  \~English
-     *      @brief Getting the current system locale
+     *      @brief Obtaining the current system locale
      */
     std::string get_locale_current_system();
 
     class LocaleManager {
     public:
+        /**
+         *  \~Russian
+         *      @brief Путь, откуда будут браться локали
+         *  \~English
+         *      @brief The path from which the locales will be loaded
+         */
         std::filesystem::path root;
+        /**
+         *  \~Russian
+         *      @brief Домен в локали
+         *  \~English
+         *      @brief The domain in the locale
+         */
         std::string domain;
+        /**
+         *  \~Russian
+         *      @brief Основная локаль
+         *  \~English
+         *      @brief Primary locale
+         */
         std::string primary; // Основная локаль
+        /**
+         *  \~Russian
+         *      @brief Второстепенная локаль
+         *  \~English
+         *      @brief Fallback locale
+         */
         std::string fallback; // Второстепенная локаль
 
         // Замена загрузки с файла на загрузку из переменной
+        /**
+         *  \~Russian
+         *      @brief Замена получения байтов .mo файла основной локали на std::vector<unsigned char> с байтами .mo файла
+         *      @details Если [0] == 0x00, замена не действует.
+         *  \~English
+         *      @brief Replacing the retrieval of bytes from the primary locale’s .mo file with a std::vector<unsigned char> containing the .mo file bytes
+         *      @details If [0] == 0x00, the replacement does not take effect.
+         */
         std::vector<unsigned char> replacer_primary;
+        /**
+         *  \~Russian
+         *      @brief Замена получения байтов .mo файла второстепенной локали на std::vector<unsigned char> с байтами .mo файла
+         *      @details Если [0] == 0x00, замена не действует.
+         *  \~English
+         *      @brief Replacing the retrieval of bytes from the fallback locale’s .mo file with a std::vector<unsigned char> containing the .mo file bytes
+         *      @details If [0] == 0x00, the replacement does not take effect.
+         */
         std::vector<unsigned char> replacer_fallback;
 
+        /**
+         *  \~Russian
+         *      @brief Возвращать только ключи
+         *  \~English
+         *      @brief Return only the keys
+         */
         bool only_key = false; // Выводить только ключи
 
+        /**
+         *  \~Russian
+         *      @brief Инициализация
+         *  \~English
+         *      @brief Initialization
+         */
         void init();
+        /**
+         *  \~Russian
+         *      @brief Получение текста по ключу
+         *      @param[in] key Ключ
+         *  \~English
+         *      @brief Retrieving text by key
+         *      @param[in] key Ключ
+         */
         const char* gettext(const char* key) const;
 
     private:
