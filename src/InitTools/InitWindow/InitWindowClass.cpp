@@ -54,7 +54,16 @@ namespace InitWindow {
         glfwMakeContextCurrent(nullptr);
     }
     void InitWindow_WindowClass::update() {
+        // frame_count
         frame_count++;
+
+        // delta_time
+        float current_time = (float) glfwGetTime();
+        delta_time = current_time - time;
+        time = current_time;
+
+        // FPS
+        FPS = 1.f / delta_time;
     }
 
     void InitWindow_WindowClass::while_glfwEvents() {
@@ -68,11 +77,16 @@ namespace InitWindow {
         );
         while(!glfwWindowShouldClose(window)) {
             while_glfwEvents();
+            glfwWaitEventsTimeout(delta_time);
+            // std::this_thread::sleep_for(std::chrono::milliseconds(while_sleep_milliseconds));
         }
     }
 
     std::string InitWindow_WindowClass::get_title() {
         return glfwGetWindowTitle(window);
+    }
+    void InitWindow_WindowClass::set_title(std::string title) {
+        glfwSetWindowTitle(window, title.c_str());
     }
     void InitWindow_WindowClass::set_title(std::string& title) {
         glfwSetWindowTitle(window, title.c_str());

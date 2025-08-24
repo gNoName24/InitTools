@@ -92,6 +92,11 @@ namespace InitWindow {
          */
         long frame_count = 0;
 
+        float time;
+        float delta_time;
+
+        float FPS;
+
         /**
          *  \~Russian
          *      @brief Инициализация окна
@@ -117,6 +122,7 @@ namespace InitWindow {
          *      @brief Задержка рендера между кадрами в миллисекундах
          */
         std::atomic<int> render_thread_sleep_milliseconds = 8;
+        //std::atomic<int> while_sleep_milliseconds = 8;
         /**
          *  \~Russian
          *      @brief Поток рендера
@@ -155,6 +161,7 @@ namespace InitWindow {
          *      @brief Установка названия окна
          *      @param[in] title Новое название окна
          */
+        void set_title(std::string title);
         void set_title(std::string& title);
 
         // Callbacks

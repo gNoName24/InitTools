@@ -13,12 +13,12 @@ int main() {
     InitWindow::InitWindow_WindowClass& window = InitWindow::windows["test_window"];
     window.render_thread_start([&window]() {
         glm::ivec2& window_size = window.window_size;
-        //glm::ivec2& window_position = window.window_position;
-        //log_debug("window_size: [{}, {}]", window_size.x, window_size.y);
-        //("window_position: [{}, {}]", window_position.x, window_position.y);
         glm::vec3 rgb = glm::vec3(glm::vec2(window_size) / 1000.0f, (window_size.x + window_size.y) / 2000.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         glClearColor(rgb.r, rgb.g, rgb.b, 1.0f);
+        if(static_cast<int>(window.frame_count) % static_cast<int>(window.FPS) == 0) {
+            window.set_title("FPS: " + std::to_string(window.FPS));
+        }
     });
     window.while_start();
     window.render_thread_stop();
