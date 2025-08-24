@@ -53,6 +53,10 @@ namespace InitLocale {
      *      @brief Obtaining the current system locale
      */
     std::string get_locale_current_system();
+    std::string get_locale_language(std::string locale);
+    std::string get_locale_territory(std::string locale);
+    std::string get_locale_language_territory(std::string locale);
+    std::string get_locale_codeset(std::string locale);
 
     class LocaleManager {
     public:

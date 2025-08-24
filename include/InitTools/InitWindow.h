@@ -36,11 +36,6 @@
 
 /////////////////////////////////////////////////////////////
 
-// InitTools LocaleManagers ~ InitWindow
-inline auto _ = [](const char* key) -> std::string {
-    return InitTools::locale_managers.InitWindow.locale_manager.gettext(key);
-};
-
 /** @ingroup InitWindow
  *  \~Russian
  *      @brief Модуль InitWindow
@@ -48,6 +43,11 @@ inline auto _ = [](const char* key) -> std::string {
  *      @brief Module InitWindow
  */
 namespace InitWindow {
+    // InitTools LocaleManagers ~ InitWindow
+    inline auto _ = [](const char* key) -> std::string {
+        return InitTools::locale_managers.InitWindow.locale_manager.gettext(key);
+    };
+
     /** @addtogroup InitWindow
      *  @{
      */

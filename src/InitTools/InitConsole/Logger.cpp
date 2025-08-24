@@ -38,16 +38,12 @@ namespace InitConsole {
         }
 
         bool initialized() {
-            if(logger == nullptr) {
-                return false;
-            }
+            if(logger == nullptr) return false;
             return true;
         }
 
         void init_check() {
-            if(!initialized()) {
-                init();
-            }
+            if(!initialized()) init();
         }
 
         // LevelShort

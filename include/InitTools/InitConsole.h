@@ -34,6 +34,7 @@
     // #
 
     // Модульные зависимости
+    #include <InitTools/InitTools.h>
     // #include <InitTools/InitPlatform.h> <- в InitConsole.cpp
 
 ///////////////////////////////////////////////////////////////
@@ -67,6 +68,11 @@
  *      @brief Module InitConsole
  */
 namespace InitConsole {
+    // InitTools LocaleManagers ~ InitConsole
+    inline auto _ = [](const char* key) -> std::string {
+        return InitTools::locale_managers.InitConsole.locale_manager.gettext(key);
+    };
+
     /** @addtogroup InitConsole
      *  @{
      */

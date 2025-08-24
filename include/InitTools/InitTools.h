@@ -117,7 +117,8 @@ namespace InitTools {
     // Список всех LocaleStorageModules каждого модуля
     struct LocaleManagers {
         LocaleStorageModules InitTools{"InitTools"};
-        LocaleStorageModules InitWindow{"InitWindow"};
+        LocaleStorageModules InitWindow{"InitConsole"};
+        LocaleStorageModules InitConsole{"InitWindow"};
     };
 
     // Каждый модуль может обратиться к этой переменной

@@ -18,6 +18,8 @@ namespace InitConsole {
         } else
         if(InitPlatform::get_OS() == "Linux") {
             system("clear");
+        } else {
+            log_error(fmt::runtime(_("clear.error.unsupport_os")), InitPlatform::get_OS());
         }
     }
 };

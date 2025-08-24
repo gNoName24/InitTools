@@ -31,6 +31,11 @@ namespace InitTools {
             locale_MOs[global_locale_primary]["InitWindow"],
             locale_MOs[global_locale_fallback]["InitWindow"]
         );
+        locale_module_manager.InitConsole = LocaleStorageModules(
+            "InitConsole",
+            locale_MOs[global_locale_primary]["InitConsole"],
+            locale_MOs[global_locale_fallback]["InitConsole"]
+        );
     }
 
     void locale_module_init(LocaleStorageModules& locale_module_manager) {
@@ -52,6 +57,7 @@ namespace InitTools {
         locale_mos_init(locale_managers);
         locale_module_init(locale_managers.InitTools);
         locale_module_init(locale_managers.InitWindow);
+        locale_module_init(locale_managers.InitConsole);
         InitLocale::LocaleManager& locallm = locale_managers.InitTools.locale_manager;
 
         if(starter_hide_info) return;
