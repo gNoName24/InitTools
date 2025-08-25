@@ -18,6 +18,7 @@
 #ifndef NONAME24_INITTOOLS_INITTOOLS_H
 #define NONAME24_INITTOOLS_INITTOOLS_H
 
+#include <InitTools/Information.h>
 // InitTools:
     // C++ Зависимости
     // #include <unordered_map> <- Уже есть в InitLocale.h
@@ -80,6 +81,8 @@ namespace InitTools {
      *      @details Fixes the current minor version without adding any explicit new functionality.
      */
     extern unsigned char VERSION_PATCH;
+    extern std::string VERSION_PRERELEASE;
+    extern std::string VERSION;
 
     // Хранилище локалей для каждого модуля. Наследует LocaleStorage
     struct LocaleStorageModules : InitLocale::LocaleStorage {

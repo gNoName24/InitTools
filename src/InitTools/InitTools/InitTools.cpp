@@ -12,9 +12,11 @@
 #include <InitTools/InitFiles.h>
 
 namespace InitTools {
-    unsigned char VERSION_MAJOR = 2;
-    unsigned char VERSION_MINOR = 0;
-    unsigned char VERSION_PATCH = 0;
+    unsigned char VERSION_MAJOR = PROJECT_VERSION_MAJOR;
+    unsigned char VERSION_MINOR = PROJECT_VERSION_MINOR;
+    unsigned char VERSION_PATCH = PROJECT_VERSION_PATCH;
+    std::string VERSION_PRERELEASE = PROJECT_PRERELEASE;
+    std::string VERSION = PROJECT_VERSION;
 
     LocaleManagers locale_managers;
     std::string global_locale_primary = "ru";
@@ -64,7 +66,7 @@ namespace InitTools {
         if(starter_hide_info_after_first_run == true) {
             if(starter_first_run == true) return;
         }
-        log_info("InitTools v{}.{}.{}", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
+        log_info("InitTools v{}", VERSION);
         log_info("InitTools: {} - {}", locallm.gettext("primary_locale"), global_locale_primary);
         log_info("InitTools: {} - {}", locallm.gettext("fallback_locale"), global_locale_fallback);
         log_info("InitTools: {} - {}", locallm.gettext("current_directory"), InitFiles::get_current_directory().string());
