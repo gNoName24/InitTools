@@ -46,44 +46,6 @@ namespace InitTools {
      *  @{
      */
 
-    /**
-     *  \~Russian
-     *      @brief Версия библиотеки (Мажор)
-     *      @details
-     *          Это мажорное число версии.\n
-     *          Мажорная версия определяет глобальную версию, которая никак не гарантирует какую-либо совместимость с предыдущими версиями прошлого мажорного числа версии.
-     *  \~English
-     *      @brief Library version (Major)
-     *      @details
-     *          This is the major version number.\n
-     *          The major version determines the global version, which does not guarantee any compatibility with previous versions of the previous major version number.
-     */
-    extern unsigned char VERSION_MAJOR;
-    /**
-     *  \~Russian
-     *      @brief Версия библиотеки (Минор)
-     *      @details
-     *          Это минорное число версии.\n
-     *          Минорное число версии определяет совместимость со старыми минорными версиями, когда новая минорная версия лишь добавляет новый функционал.
-     *  \~English
-     *      @brief Library version (Minor)
-     *      @details
-     *          This is a minor version number.\n
-     *          The minor version number determines compatibility with older minor versions when the new minor version only adds new functionality.
-     */
-    extern unsigned char VERSION_MINOR;
-    /**
-     *  \~Russian
-     *      @brief Версия библиотеки (Патч)
-     *      @details Исправляет текущую минорную версию, не добавляя явный новый функционал.
-     *  \~English
-     *      @brief Library version (Patch)
-     *      @details Fixes the current minor version without adding any explicit new functionality.
-     */
-    extern unsigned char VERSION_PATCH;
-    extern std::string VERSION_PRERELEASE;
-    extern std::string VERSION;
-
     // Хранилище локалей для каждого модуля. Наследует LocaleStorage
     struct LocaleStorageModules : InitLocale::LocaleStorage {
         std::vector<unsigned char> replacer_primary;

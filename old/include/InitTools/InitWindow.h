@@ -243,14 +243,14 @@ namespace InitWindow {
      *  \~English
      *      @brief OpenGL version (Major)
      */
-    extern const int opengl_version_major;
+    extern const int opengl_target_version_major;
     /**
      *  \~Russian
      *      @brief Версия OpenGL (Минор)
      *  \~English
      *      @brief OpenGL version (Minor)
      */
-    extern const int opengl_version_minor;
+    extern const int opengl_target_version_minor;
 
     /**
      *  \~Russian

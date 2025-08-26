@@ -22,8 +22,8 @@ namespace InitWindow {
             log_error(_("init_GLFW.error.\"glfwInit() != GLFW_TRUE\""));
             throw std::runtime_error(_("init_GLFW.error.\"glfwInit() != GLFW_TRUE\""));
         }
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, opengl_version_major);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, opengl_version_minor);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, opengl_target_version_major);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, opengl_target_version_minor);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);
     }
