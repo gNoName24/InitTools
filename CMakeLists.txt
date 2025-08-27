@@ -34,17 +34,28 @@ set(INITTOOLS_VERSION_PATCH ${PROJECT_VERSION_PATCH})
 # INITTOOLS_FULL_VERSION - x.x.x.-pr.x
 
 # 1. InitConsole
+message(STATUS "")
 project_message(STATUS ">InitConsole<")
 set(INITTOOLS_PROJECT_MESSAGE_MODULE ON)
     add_subdirectory(modules/InitConsole)
 set(INITTOOLS_PROJECT_MESSAGE_MODULE OFF)
 
 # 2. InitLocale
+message(STATUS "")
 project_message(STATUS ">InitLocale<")
 set(INITTOOLS_PROJECT_MESSAGE_MODULE ON)
     add_subdirectory(modules/InitLocale)
 set(INITTOOLS_PROJECT_MESSAGE_MODULE OFF)
 
+# 2. InitWindow
+message(STATUS "")
+project_message(STATUS ">InitWindow<")
+set(INITTOOLS_PROJECT_MESSAGE_MODULE ON)
+    add_subdirectory(modules/InitWindow)
+set(INITTOOLS_PROJECT_MESSAGE_MODULE OFF)
+
+
+message(STATUS "")
 
 # Тестирование
 include(CTest)
@@ -53,4 +64,5 @@ enable_testing()
 add_executable(InitToolsTests tests/main.cpp)
 target_link_libraries(InitToolsTests PRIVATE InitConsole)
 target_link_libraries(InitToolsTests PRIVATE InitLocale)
+target_link_libraries(InitToolsTests PRIVATE InitWindow)
 add_test(NAME InitToolsTests_main COMMAND InitToolsTests)

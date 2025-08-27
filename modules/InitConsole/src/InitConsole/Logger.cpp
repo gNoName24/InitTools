@@ -1,6 +1,7 @@
 #include <InitTools/InitConsole.h>
 
 // C++
+#include <iostream>
 #include <chrono>
 #include <sstream>
 #include <iomanip>
@@ -8,6 +9,9 @@
 
 namespace InitConsole {
     void Logger::log(const std::string& msg, const std::string& level, const std::string& file_name, int file_line, const std::string& function_name) {
+        if(level == "debug") {
+            if(std::string(BUILD_TYPE_STR) != "Debug") return;
+        }
         std::string output_message;
         output_message.reserve(block_code_length + 16 + msg.size());
         Level& level_self = levels[level];
@@ -30,11 +34,10 @@ namespace InitConsole {
         time_stream << std::put_time(&local_tm, "%H:%M:%S");
 
         std::chrono::milliseconds ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
+        time_stream << '.' << std::setw(3) << std::setfill('0') << ms.count();
 
         output_message.append(1, block_left);
         output_message.append(time_stream.str());
-        output_message.append(1, '.');
-        output_message.append(std::to_string(ms.count()));
         output_message.append(1, block_right);
         output_message.append(1, ' ');
 
@@ -65,8 +68,6 @@ namespace InitConsole {
         log(msg, "error", file_name, file_line, function_name);
     }
     void Logger::log_debug_full(const std::string& msg, const std::string& file_name, int file_line, const std::string& function_name) {
-        if(std::string(BUILD_TYPE_STR) == "Debug") {
-            log(msg, "debug", file_name, file_line, function_name);
-        }
+        log(msg, "debug", file_name, file_line, function_name);
     }
 };

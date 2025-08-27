@@ -3,15 +3,6 @@
 namespace InitConsole {
     // Вспомогательные функции, опционально реализуемые в другие модулях
 
-    // extern_function_gettext
-    std::function<void(
-        const std::string& key,
-        const std::string& locale_primary,
-        const std::string& locale_fallback
-    )> extern_function_gettext = [](const std::string& key, const std::string& locale_primary, const std::string& locale_fallback) {};
-    std::string extern_function_gettext_variable_locale_primary = "ru";
-    std::string extern_function_gettext_variable_locale_fallback = "ru";
-
     // =================================================================
 
     // Namespace Block

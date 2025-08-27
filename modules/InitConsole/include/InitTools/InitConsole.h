@@ -14,18 +14,6 @@
 namespace InitConsole {
     // Вспомогательные функции, опционально реализуемые в другие модулях
 
-    // extern_function_gettext (Родитель - InitLocale)
-    extern std::function<
-    void(
-        const std::string& key, // Ключ
-        const std::string& locale_primary, // Основная локаль
-        const std::string& locale_fallback // Второстепенная локаль
-    )
-    > extern_function_gettext;
-    extern std::string extern_function_gettext_variable_locale_primary;
-    extern std::string extern_function_gettext_variable_locale_fallback;
-    #define INITCONSOLE_gettext(key) extern_function_gettext(key, extern_function_gettext_variable_locale_primary, extern_function_gettext_variable_locale_fallback)
-
     // =================================================================
 
     // Билдер блоков
@@ -56,7 +44,7 @@ namespace InitConsole {
         bool show_block_name = false;
 
         // Длина второго/третьего блока (файл:строка функция)
-        short block_code_length = 24;
+        short block_code_length = 48;
 
         // Границы блоков
         char block_left = '[';

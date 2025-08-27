@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.24)
 project(InitLocale)
+
+# Зависимости:
+# Нету
+
 project_message(STATUS "Add module .cpp files")
 add_library(InitLocale
     src/InitLocale.cpp

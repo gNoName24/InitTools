@@ -2,6 +2,7 @@
 #include <iostream>
 #include <InitTools/InitConsole.h>
 #include <InitTools/InitLocale.h>
+#include <InitTools/InitWindow.h>
 
 // Логгер
 InitConsole::Logger logger("test logger");
@@ -21,9 +22,7 @@ int main() {
     std::chrono::duration<double, std::milli> ms = end - start;
     logger.log_info("Время выполнения: " + std::to_string(ms.count()) + " ms");*/
 
-    logger.block_code_length = 32;
-
-    InitLocale::extern_function_log = [](const std::string& msg, const std::string& level, const std::string& file_name, int line, const std::string& function_name) {
+    /*InitLocale::extern_function_log = [](const std::string& msg, const std::string& level, const std::string& file_name, int line, const std::string& function_name) {
         logger.log(msg, level, file_name, line, function_name);
     };
 
@@ -38,7 +37,23 @@ int main() {
     locale_manager.primary = InitLocale::get_locale_language(InitLocale::get_locale_current_system());
     locale_manager.fallback = "en";
     locale_manager.build();
-    logger.log_info(locale_manager.gettext("test.key"));
+    logger.log_info(locale_manager.gettext("test.key"));*/
 
+    // Окно
+    InitWindow::extern_function_log = [](const std::string& msg, const std::string& level, const std::string& file_name, int line, const std::string& function_name) {
+        logger.log(msg, level, file_name, line, function_name);
+    };
+
+    InitWindow::WindowManager& window = InitWindow::window_new("test_window", true);
+    window.initialization();
+
+    window.render_start([&window]() {
+        glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        window.set_title("FPS: " + std::to_string(window.get_fps()));
+    });
+    window.while_start();
+
+    window.terminate();
     return 0;
 }

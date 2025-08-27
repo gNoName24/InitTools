@@ -15,18 +15,6 @@ extern std::function<
 > extern_function_log;
 #define *_log(msg, level) extern_function_log(msg, level, __FILE_NAME__, __LINE__, __FUNCTION__)
 
-// extern_function_gettext (Родитель - InitLocale)
-extern std::function<
-    void(
-        const std::string& key, // Ключ
-        const std::string& locale_primary, // Основная локаль
-        const std::string& locale_fallback // Второстепенная локаль
-    )
-> extern_function_gettext;
-extern std::string extern_function_gettext_variable_locale_primary;
-extern std::string extern_function_gettext_variable_locale_fallback;
-#define *_gettext(key) extern_function_gettext(key, extern_function_gettext_variable_locale_primary, extern_function_gettext_variable_locale_fallback)
-
 // =================================================================
 
 --- .cpp:
@@ -40,14 +28,5 @@ std::function<void(
     int line,
     const std::string& function_name
 )> extern_function_log = [](const std::string& msg, const std::string& level, const std::string& file_name, int line, const std::string& function_name) {};
-
-// extern_function_gettext
-std::function<void(
-    const std::string& key,
-    const std::string& locale_primary,
-    const std::string& locale_fallback
-)> extern_function_gettext = [](const std::string& key, const std::string& locale_primary, const std::string& locale_fallback) {};
-std::string extern_function_gettext_variable_locale_primary = "ru";
-std::string extern_function_gettext_variable_locale_fallback = "ru";
 
 // =================================================================
