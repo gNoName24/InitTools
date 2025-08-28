@@ -76,7 +76,6 @@ namespace InitWindow {
                 initialization_GLAD();
             }
 
-            //fps_target_ms = 1.0f / fps_target;
             fps_target_ms = 1000.0f / fps_target;
 
             render_thread_running = true;
@@ -86,12 +85,8 @@ namespace InitWindow {
                 render_callback();
                 glfwSwapBuffers(window);
 
-                // sleep_time = fps_target_ms - delta_time;
-                INITWINDOW_log_wm("delta_time: " + std::to_string(delta_time) + " / fps_target_ms: " + std::to_string(fps_target_ms), "debug");
+                //INITWINDOW_log_wm("delta_time: " + std::to_string(delta_time) + " / fps_target_ms: " + std::to_string(fps_target_ms), "debug");
                 std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(fps_target_ms)));
-                /*if(sleep_time > 0.0f) {
-                    std::this_thread::sleep_for(std::chrono::duration<float>(sleep_time));
-                }*/
             }
 
             render_thread_running = false;

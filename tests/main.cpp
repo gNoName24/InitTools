@@ -47,10 +47,15 @@ int main() {
     InitWindow::WindowManager& window = InitWindow::window_new("test_window", true);
     window.initialization();
 
-    window.render_start([&window]() {
+    int time_int_back = 0;
+    window.render_start([&window, &time_int_back]() {
         glClear(GL_COLOR_BUFFER_BIT);
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        window.set_title("FPS: " + std::to_string(window.get_fps()));
+        int time_int = static_cast<int>(window.get_time());
+        if(time_int != time_int_back) {
+            window.set_title("FPS: " + std::to_string(window.get_fps()));
+            time_int_back = time_int;
+        }
     });
     window.while_start();
 

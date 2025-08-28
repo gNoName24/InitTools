@@ -37,7 +37,7 @@ namespace InitConsole {
         std::unordered_map<std::string, Logger::Level> levels = {
             {"info", {"I", "\033[1;37m"}},
             {"error", {"E", "\033[1;31m"}},
-            {"debug", {"D", "\033[1;36m"}},
+            {"debug", {"D", "\033[1;36m"}}
         };
 
         // Показывать название логгера во втором блоке
