@@ -25,7 +25,8 @@ namespace InitWindow {
             initialization_GLAD();
         }
 
-        glfwSwapInterval(1);
+        // Добавь потом настройку этого
+        glfwSwapInterval(0);
 
         // Установка параметров
         INITWINDOW_log_wm("Setting window parameters", "debug");

@@ -46,6 +46,9 @@ namespace InitWindow {
     }
 
     // fps_target
+    void WindowManager::set_fps_target(const uint16_t& fps_target) {
+        this->fps_target = fps_target;
+    }
     const uint16_t& WindowManager::get_fps_target() const {
         return fps_target;
     }

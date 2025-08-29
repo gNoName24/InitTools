@@ -65,4 +65,11 @@ add_executable(InitToolsTests tests/main.cpp)
 target_link_libraries(InitToolsTests PRIVATE InitConsole)
 target_link_libraries(InitToolsTests PRIVATE InitLocale)
 target_link_libraries(InitToolsTests PRIVATE InitWindow)
-add_test(NAME InitToolsTests_main COMMAND InitToolsTests)
+add_test(NAME InitToolsTestsMain COMMAND InitToolsTests)
+
+# Демо
+add_executable(InitToolsDemo tests/demo.cpp)
+target_link_libraries(InitToolsDemo PRIVATE InitConsole)
+target_link_libraries(InitToolsDemo PRIVATE InitLocale)
+target_link_libraries(InitToolsDemo PRIVATE InitWindow)
+add_test(NAME InitToolsTestsDemo COMMAND InitToolsDemo)

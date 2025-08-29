@@ -48,17 +48,19 @@ namespace InitWindow {
 
     std::unordered_map<std::string, WindowManager> windows;
 
-    void window_new(const std::string& id) {
+    void window_new(const std::string& id, WindowManager** window) {
         INITWINDOW_log("Create new window / ID: " + id, "debug");
         auto result = windows.emplace(id, id);
         if(result.second) {
             INITWINDOW_log("The window " + id + " created successfully", "debug");
+            if(window != nullptr) {
+                *window = &result.first->second;
+            }
         } else {
             INITWINDOW_log("The window " + id + " already exists", "error");
+            if(window != nullptr) {
+                *window = nullptr;
+            }
         }
-    }
-    WindowManager& window_new(const std::string& id, bool need_return) {
-        window_new(id);
-        return windows.at(id);
     }
 };

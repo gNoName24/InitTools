@@ -47,8 +47,7 @@ namespace InitWindow {
     class WindowManager;
     extern std::unordered_map<std::string, WindowManager> windows;
 
-    void window_new(const std::string& id);
-    WindowManager& window_new(const std::string& id, bool need_return);
+    void window_new(const std::string& id, WindowManager** window = nullptr);
 
     class WindowManager {
     public:
@@ -103,6 +102,7 @@ namespace InitWindow {
         const float& get_delta_time() const;
 
         // fps_target
+        void set_fps_target(const uint16_t& fps_target);
         const uint16_t& get_fps_target() const;
 
         // fps_target_ms
