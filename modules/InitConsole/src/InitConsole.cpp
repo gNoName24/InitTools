@@ -1,4 +1,4 @@
-#include <InitTools/InitConsole.h>
+#include <InitTools/InitConsole.hpp>
 
 namespace InitConsole {
     // Вспомогательные функции, опционально реализуемые в другие модулях

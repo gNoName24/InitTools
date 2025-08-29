@@ -1,5 +1,5 @@
 // Namespace InitWindow
-#include <InitTools/InitWindow.h>
+#include <InitTools/InitWindow.hpp>
 
 // C++
 #include <stdexcept>

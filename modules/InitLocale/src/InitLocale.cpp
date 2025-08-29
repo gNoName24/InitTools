@@ -1,4 +1,4 @@
-#include <InitTools/InitLocale.h>
+#include <InitTools/InitLocale.hpp>
 
 namespace InitLocale {
     // Вспомогательные функции, опционально реализуемые в другие модулях

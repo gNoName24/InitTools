@@ -1,5 +1,5 @@
 // Namespace InitWindow -> Class WindowManager
-#include <InitTools/InitWindow.h>
+#include <InitTools/InitWindow.hpp>
 
 // C++
 #include <stdexcept>

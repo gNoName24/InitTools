@@ -1,5 +1,5 @@
 // Namespace InitWindow -> Segment Set-Get
-#include <InitTools/InitWindow.h>
+#include <InitTools/InitWindow.hpp>
 
 namespace InitWindow {
     // - Window

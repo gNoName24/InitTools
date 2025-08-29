@@ -1,8 +1,8 @@
 //#include <chrono>
 #include <iostream>
-#include <InitTools/InitConsole.h>
-#include <InitTools/InitLocale.h>
-#include <InitTools/InitWindow.h>
+#include <InitTools/InitConsole.hpp>
+#include <InitTools/InitLocale.hpp>
+#include <InitTools/InitWindow.hpp>
 
 // Логгер
 InitConsole::Logger logger("test logger");

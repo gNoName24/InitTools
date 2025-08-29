@@ -1,4 +1,4 @@
-#include <InitTools/InitConsole.h>
+#include <InitTools/InitConsole.hpp>
 
 // C++
 #include <iostream>

@@ -1,5 +1,5 @@
 // Namespace InitWindow -> Segment Callbacks
-#include <InitTools/InitWindow.h>
+#include <InitTools/InitWindow.hpp>
 
 namespace InitWindow {
 

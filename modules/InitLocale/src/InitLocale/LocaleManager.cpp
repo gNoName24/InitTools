@@ -1,4 +1,4 @@
-#include <InitTools/InitLocale.h>
+#include <InitTools/InitLocale.hpp>
 
 // C++
 #include <cstring>
