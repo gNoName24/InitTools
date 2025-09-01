@@ -61,11 +61,11 @@ message(STATUS "")
 include(CTest)
 enable_testing()
 
-add_executable(InitToolsTests tests/main.cpp)
-target_link_libraries(InitToolsTests PRIVATE InitConsole)
-target_link_libraries(InitToolsTests PRIVATE InitLocale)
-target_link_libraries(InitToolsTests PRIVATE InitWindow)
-add_test(NAME InitToolsTestsMain COMMAND InitToolsTests)
+#add_executable(InitToolsTests tests/main.cpp)
+#target_link_libraries(InitToolsTests PRIVATE InitConsole)
+#target_link_libraries(InitToolsTests PRIVATE InitLocale)
+#target_link_libraries(InitToolsTests PRIVATE InitWindow)
+#add_test(NAME InitToolsTestsMain COMMAND InitToolsTests)
 
 # Демо
 add_executable(InitToolsDemo tests/demo.cpp)

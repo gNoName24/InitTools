@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.24)
 project(InitWindow)
 
 # Зависимости:
-# GLFW
+# GLFW, GLAD, GLM
 
 include(FetchContent)
 

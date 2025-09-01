@@ -47,13 +47,6 @@ int main() {
         glClearColor(color[0] / 256.0f, color[1] / 256.0f, color[2] / 256.0f, 1.0f);
 
         // FPS
-        int time_int = static_cast<int>(window->get_time());
-        if(time_int != time_int_back) {
-            /*window->set_title("FPS: " + std::to_string(
-                static_cast<int>(std::round(window->get_fps()))
-            ));*/
-            time_int_back = time_int;
-        }
         std::ostringstream title;
         title << "FPS: " << static_cast<int>(std::round(window->get_fps()))
               << " / color: {"
