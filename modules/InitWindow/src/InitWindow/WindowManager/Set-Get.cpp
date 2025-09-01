@@ -19,13 +19,17 @@ namespace InitWindow {
     }
 
     // window_size
-    void WindowManager::set_window_size(const glm::ivec2& window_size) {};
+    void WindowManager::set_window_size(const glm::ivec2& window_size) {
+        this->window_size = window_size;
+    };
     const glm::ivec2& WindowManager::get_window_size() const {
         return window_size;
     };
 
     // window_position
-    void WindowManager::set_window_position(const glm::ivec2& window_position) {};
+    void WindowManager::set_window_position(const glm::ivec2& window_position) {
+        this->window_position = window_position;
+    };
     const glm::ivec2& WindowManager::get_window_position() const {
         return window_position;
     };
@@ -65,5 +69,12 @@ namespace InitWindow {
 
     // - Mouse
 
+    // mouse_position
+    void WindowManager::set_mouse_position(const glm::ivec2& mouse_position) {
+        this->mouse_position = mouse_position;
+    }
+    const glm::ivec2& WindowManager::get_mouse_position() const {
+        return mouse_position;
+    }
 
 };

@@ -113,6 +113,10 @@ namespace InitWindow {
 
         // - Mouse
 
+        // mouse_position
+        void set_mouse_position(const glm::ivec2& mouse_position);
+        const glm::ivec2& get_mouse_position() const;
+
         // --------------------------------------
 
         // Segment Callbacks ---------------------------------------------------------------------------
