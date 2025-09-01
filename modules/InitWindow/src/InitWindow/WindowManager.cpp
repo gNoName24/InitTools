@@ -104,7 +104,7 @@ namespace InitWindow {
 
     void WindowManager::while_step() {
         glfwPollEvents();
-        glfwWaitEventsTimeout(0.001);
+        glfwWaitEventsTimeout(delta_time);
     }
     void WindowManager::while_start() {
         INITWINDOW_log_wm("While start", "debug");
