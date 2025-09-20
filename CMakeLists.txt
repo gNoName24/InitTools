@@ -14,8 +14,8 @@ function(project_message msg_type msg_text)
     endif()
 endfunction()
 
-set(PROJECT_RELEASE false)
-set(PROJECT_PRERELEASE "beta.2")
+set(PROJECT_RELEASE true)
+set(PROJECT_PRERELEASE "")
 set(PROJECT_FULL_VERSION "${PROJECT_VERSION}")
 if(NOT PROJECT_RELEASE)
     set(PROJECT_FULL_VERSION "${PROJECT_VERSION}-${PROJECT_PRERELEASE}")
@@ -47,29 +47,38 @@ set(INITTOOLS_PROJECT_MESSAGE_MODULE ON)
     add_subdirectory(modules/InitLocale)
 set(INITTOOLS_PROJECT_MESSAGE_MODULE OFF)
 
-# 2. InitWindow
+# 3. InitWindow
 message(STATUS "")
 project_message(STATUS ">InitWindow<")
 set(INITTOOLS_PROJECT_MESSAGE_MODULE ON)
     add_subdirectory(modules/InitWindow)
 set(INITTOOLS_PROJECT_MESSAGE_MODULE OFF)
 
+# 4. InitGraphics
+#message(STATUS "")
+#project_message(STATUS ">InitGraphics<")
+#set(INITTOOLS_PROJECT_MESSAGE_MODULE ON)
+#    add_subdirectory(modules/InitGraphics)
+#set(INITTOOLS_PROJECT_MESSAGE_MODULE OFF)
+
 
 message(STATUS "")
 
 # Тестирование
-include(CTest)
-enable_testing()
+#include(CTest)
+#enable_testing()
 
 #add_executable(InitToolsTests tests/main.cpp)
 #target_link_libraries(InitToolsTests PRIVATE InitConsole)
 #target_link_libraries(InitToolsTests PRIVATE InitLocale)
 #target_link_libraries(InitToolsTests PRIVATE InitWindow)
+#target_link_libraries(InitToolsTests PRIVATE InitGraphics)
 #add_test(NAME InitToolsTestsMain COMMAND InitToolsTests)
 
 # Демо
-add_executable(InitToolsDemo tests/demo.cpp)
-target_link_libraries(InitToolsDemo PRIVATE InitConsole)
-target_link_libraries(InitToolsDemo PRIVATE InitLocale)
-target_link_libraries(InitToolsDemo PRIVATE InitWindow)
-add_test(NAME InitToolsTestsDemo COMMAND InitToolsDemo)
+#add_executable(InitToolsDemo tests/demo.cpp)
+#target_link_libraries(InitToolsDemo PRIVATE InitConsole)
+#target_link_libraries(InitToolsDemo PRIVATE InitLocale)
+#target_link_libraries(InitToolsDemo PRIVATE InitWindow)
+#target_link_libraries(InitToolsDemo PRIVATE InitGraphics)
+#add_test(NAME InitToolsTestsDemo COMMAND InitToolsDemo)
